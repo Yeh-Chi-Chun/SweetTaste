@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white">
+  <div class="container">
+      <button class="navbar-toggler d-md-none d-flex align-items-center" type="button" data-toggle="collapse"
+          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="material-icons">
+              menu
+          </i>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/home-page']">
+          <img src="assets/images/logo-all-dark.svg" width="220" height="40" alt="" class="d-none d-md-inline-block">
+          <img src="assets/images/logotype-sm-dark.svg" width="114" height="18" alt="" class="d-inline-block d-md-none">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item ">
+                  <a class="nav-link active" [routerLink]="['/home-page']">首頁</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" [routerLink]="['/product']">甜點</a>
+              </li>
+              <li class="nav-item ">
+                  <a class="nav-link" [routerLink]="['/register']">登入</a>
+              </li>
+              <li class="nav-item ">
+                  <a class="nav-link" [routerLink]="['/carts']">購車</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav>

@@ -1,0 +1,88 @@
+<div class="container my-lg-5">
+  <div class="row">
+      <div class="col-lg-8">
+          <div class="bg-primary text-white p-3">
+              <div class="form-row mb-3">
+                  <div class="col-6">
+                      <span class="h1">發票</span>
+                  </div>
+                  <div class="col-6"></div>
+              </div>
+              <nav class="nav nav-pills nav-fill nav-dark mb-5">
+                  <a class="nav-item nav-link py-3 h4 active" href="#">電子發票</a>
+                  <a class="nav-item nav-link py-3 h4 text-white" href="#">郵寄發票</a>
+              </nav>
+              <div class="form-group">
+                  <label for="email" class="h4">電子郵件信箱</label>
+                  <input type="text" class="form-control form-control-lg" id="email"
+                      placeholder="hello@email.com">
+              </div>
+              <div class="form-group">
+                  <label for="tno" class="h4">統一編號(選填)</label>
+                  <input type="text" id="tno" class="form-control form-control-lg" placeholder="123">
+              </div>
+          </div>
+          <a type="button" [routerLink]="['/success']" class="btn btn-yellow btn-lg btn-block">下一步</a>
+      </div>
+      <div class="col-lg-4 d-none d-lg-block text-primary-light">
+          <div class="card mb-3">
+              <div class="card-header text-center bg-primary-lighter">
+                  <div class="h3">訂單摘要</div>
+              </div>
+              <div class="card-body">
+                  <div class="d-flex justify-content-between mb-2">
+                      <span>小計</span>
+                      <span>NT$ 2700</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-2">
+                      <span>運費</span>
+                      <span>NT$ 300</span>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <span class="h4">總計</span>
+                      <strong class="h4">NT$ 3000</strong>
+                  </div>
+              </div>
+          </div>
+          <div class="card border-primary-lighter">
+              <div class="card-header text-center bg-primary-lighter">
+                  <div class="h3">購物清單</div>
+              </div>
+              <div class="card-body">
+                  <div class="d-flex">
+                      <div class="cart-image cart-image-sm mr-3"
+                          style="background-image: url(https://images.unsplash.com/photo-1497052254059-f3e0bf1a5133?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=ce7267675921fc7e41b5610f49750a40&amp;auto=format&amp;fit=crop&amp;w=685&amp;q=80)">
+                      </div>
+                      <div class="d-flex align-items-center">
+                          <div class="flex-fill mr-lg-4 text-primary-light">
+                              <span class="h5">抹茶馬卡龍 (2)</span><br>
+                              <span>NT$ 450</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-3">
+                      <div class="cart-image cart-image-sm mr-3"
+                          style="background-image: url(https://images.unsplash.com/photo-1497052254059-f3e0bf1a5133?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=ce7267675921fc7e41b5610f49750a40&amp;auto=format&amp;fit=crop&amp;w=685&amp;q=80)">
+                      </div>
+                      <div class="d-flex align-items-center">
+                          <div class="flex-fill mr-lg-4 text-primary-light">
+                              <span class="h5">抹茶馬卡龍 (2)</span><br>
+                              <span>NT$ 450</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-3">
+                      <div class="cart-image cart-image-sm mr-3"
+                          style="background-image: url(https://images.unsplash.com/photo-1497052254059-f3e0bf1a5133?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=ce7267675921fc7e41b5610f49750a40&amp;auto=format&amp;fit=crop&amp;w=685&amp;q=80)">
+                      </div>
+                      <div class="d-flex align-items-center">
+                          <div class="flex-fill mr-lg-4 text-primary-light">
+                              <span class="h5">抹茶馬卡龍 (2)</span><br>
+                              <span>NT$ 450</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
