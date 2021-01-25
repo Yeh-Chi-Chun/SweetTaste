@@ -12,23 +12,23 @@
     <div class="col-md-4 mb-5">
       <h2 class="bg-primary text-white text-center h4 py-3 mb-0">甜點類別</h2>
       <div class="list-group text-center">
-        <a href="#" class="list-group-item list-group-item-action h4 active">
+        <a [routerLink]="['/product']" class="list-group-item list-group-item-action h4 active">
           所有甜點
         </a>
-        <a on-click="productSort('newList')" class="list-group-item list-group-item-action h4">本日精選</a>
-        <a href="#" class="list-group-item list-group-item-action h4">人氣推薦</a>
+        <a on-click="productSort('featured')" class="list-group-item list-group-item-action h4">本日精選</a>
+        <a on-click="productSort('popular')" class="list-group-item list-group-item-action h4">人氣推薦</a>
         <a on-click="productSort('newList')" class="list-group-item list-group-item-action h4">新品上市</a>
-        <a href="#" class="list-group-item list-group-item-action h4">蛋糕</a>
-        <a href="#" class="list-group-item list-group-item-action h4">甜點</a>
+        <a on-click="productSort('isCake')" class="list-group-item list-group-item-action h4">蛋糕類</a>
+        <a on-click="productSort('isSweets')" class="list-group-item list-group-item-action h4">點心類</a>
       </div>
     </div>
     <div class="col-md-8">
       <div class="row mb-5">
-        <div class="col-md-6 mb-5" *ngFor="let product of pageProductList; let i=index">
+        <div class="col-md-6 mb-5" *ngFor="let product of disPlayProductList; let i=index">
               <div class="card">
                 <div class="card-img-top" style="height: 315px; background-image: url({{product['productPic']}});">
                   <div class="item-tag">
-                    <strong>本日精選</strong>
+                    <strong>{{currentClass}}</strong>
                   </div>
                 </div>
                 <div class="card-body">

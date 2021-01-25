@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { GetDataService } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-product',
@@ -11,69 +12,114 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProductComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private dataService: GetDataService) { }
 
   productList: any[] = [];
-  pageProductList: any[] = [];
+  currentProductList: any[] = [];
+  disPlayProductList: any[] = [];
   pageArray: number[] = [];
+  currentClass = "甜點";
   currentPageNum = 1;
   pageSize = 4;
-  totalPage = 0;
+  currentPage = 0;
 
   // 拿商品資料並設定初始值
-  getProductData(): void {
-    const productUrl = 'http://localhost:8080/product';
 
-    this.http.get<any>(productUrl).subscribe(res => {
-      this.productList = res;
-      this.totalPage = Math.floor(this.productList.length / this.pageSize + 1);
-      this.changePage(this.currentPageNum);
-      this.setPage();
-      console.log(this.totalPage);
-      console.log(this.pageArray);
-    });
+  setData(data: any) {
+    this.productList = data;
+    this.currentPage = Math.floor(this.productList.length / this.pageSize + 1);
+    this.currentProductList = this.productList;
+    console.log(this.productList);
+    this.changePage(this.currentPageNum);
+    this.setPage();
   }
+
 
   // 設定分頁數
   setPage(): void {
-    for (let i = 1; i <= this.totalPage; i++) {
+    this.pageArray = [];
+    this.currentPage = Math.floor((this.currentProductList.length - 1) / this.pageSize + 1);
+    for (let i = 1; i <= this.currentPage; i++) {
       this.pageArray.push(i);
     }
   }
 
   // 換頁
-  changePage(currentPage: number): void {
-    this.pageProductList = this.productList.slice((currentPage - 1) * this.pageSize, currentPage * this.pageSize);
+  changePage(currentPageNum: number): void {
+    this.disPlayProductList = this.currentProductList.slice((currentPageNum - 1) * this.pageSize, currentPageNum * this.pageSize);
+    console.log(this.currentProductList);
   }
 
   // 商品分類
   productSort(classification: string): void {
-    this.pageProductList.length = 0;
+    this.currentProductList = [];
+    console.log(this.productList);
+
     switch (classification) {
       case 'newList': {
+        this.currentClass = '新品上市';
         this.productList.forEach(item => {
           if (item['newList'] === '1') {
-            this.pageProductList.push(item);
+            this.currentProductList.push(item);
           }
         });
+        this.changePage(1);
+        this.setPage();
         break;
       }
       case 'popular': {
-        //statements;
+        this.currentClass = '人氣推薦';
+        this.productList.forEach(item => {
+          if (item['popular'] === '1') {
+            this.currentProductList.push(item);
+          }
+        });
+        this.changePage(1);
+        this.setPage();
         break;
       }
       case 'featured': {
-        //statements;
+        this.currentClass = '本日精選';
+        this.productList.forEach(item => {
+          if (item['featured'] === '1') {
+            this.currentProductList.push(item);
+          }
+        });
+        this.changePage(1);
+        this.setPage();
         break;
       }
+      case 'isCake': {
+        this.currentClass = '蛋糕';
+        this.productList.forEach(item => {
+          if (item['isCake'] === '1') {
+            console.log(item);
+            this.currentProductList.push(item);
+          }
+        });
+        this.changePage(1);
+        this.setPage();
+        break;
+      }
+      case 'isSweets': {
+        this.currentClass = '點心';
+        this.productList.forEach(item => {
+          if (item['isSweets'] === '1') {
+            this.currentProductList.push(item);
+          }
+        });
+        this.changePage(1);
+        this.setPage();
+        break;
+      }
+
     }
   }
 
 
   ngOnInit(): void {
     console.log('start get product data...');
-    this.getProductData();
-
+    this.dataService.getProductData().subscribe(value => this.setData(value))
   }
 
 }

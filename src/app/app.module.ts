@@ -1,3 +1,4 @@
+import { GetDataService } from './get-data.service';
 
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,7 +38,7 @@ import { BrowserModule } from '@angular/platform-browser';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [GetDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
