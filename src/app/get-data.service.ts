@@ -16,18 +16,18 @@ export class GetDataService {
   }
 }
 
-export class Product{
+export class Product {
   constructor(
-    public productName:string,
-    public productPrice:string,
-    public productPic:string,
-    public reserve:string,
-    public newList:string,
-    public popular:string,
-    public featured:string,
-    public isCake:string,
-    public isSweets:string
-  ){}
+    public productName: string,
+    public productPrice: string,
+    public productPic: string,
+    public reserve: string,
+    public newList: string,
+    public popular: string,
+    public featured: string,
+    public isCake: string,
+    public isSweets: string
+  ) { }
 
 
 }

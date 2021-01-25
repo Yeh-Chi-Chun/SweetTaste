@@ -12,14 +12,15 @@
     <div class="col-md-4 mb-5">
       <h2 class="bg-primary text-white text-center h4 py-3 mb-0">甜點類別</h2>
       <div class="list-group text-center">
-        <a [routerLink]="['/product']" class="list-group-item list-group-item-action h4 active">
-          所有甜點
-        </a>
+        <a on-click="productSort('all')" class="list-group-item list-group-item-action h4 active">所有甜點</a>
         <a on-click="productSort('featured')" class="list-group-item list-group-item-action h4">本日精選</a>
         <a on-click="productSort('popular')" class="list-group-item list-group-item-action h4">人氣推薦</a>
         <a on-click="productSort('newList')" class="list-group-item list-group-item-action h4">新品上市</a>
         <a on-click="productSort('isCake')" class="list-group-item list-group-item-action h4">蛋糕類</a>
         <a on-click="productSort('isSweets')" class="list-group-item list-group-item-action h4">點心類</a>
+        <input #box (keyup.enter)="searchProduct(box.value)" class="form-control flex-fill py-3 mr-0" type="search" placeholder="請輸入您想搜尋的甜點" aria-label="Search" style="height: 64px;">
+        <button on-click="searchProduct(box.value)" class="btn btn-yellow btn-lg d-flex align-items-center justify-content-center" style="height: 64px;">
+          <i class="material-icons">搜尋</i></button>
       </div>
     </div>
     <div class="col-md-8">

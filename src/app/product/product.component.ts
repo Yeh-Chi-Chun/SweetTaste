@@ -18,14 +18,13 @@ export class ProductComponent implements OnInit {
   currentProductList: any[] = [];
   disPlayProductList: any[] = [];
   pageArray: number[] = [];
-  currentClass = "甜點";
+  currentClass = '甜點';
   currentPageNum = 1;
   pageSize = 4;
   currentPage = 0;
 
   // 拿商品資料並設定初始值
-
-  setData(data: any) {
+  setData(data: any): void {
     this.productList = data;
     this.currentPage = Math.floor(this.productList.length / this.pageSize + 1);
     this.currentProductList = this.productList;
@@ -112,8 +111,29 @@ export class ProductComponent implements OnInit {
         this.setPage();
         break;
       }
+      case 'all': {
+        this.currentClass = '甜點';
+        this.currentProductList = this.productList;
+        this.changePage(1);
+        this.setPage();
+        break;
+      }
+
 
     }
+  }
+
+  // 搜尋商品
+  searchProduct(beSearch: string): void {
+    this.currentProductList = [];
+    this.productList.forEach(item => {
+      if (item['productName'].indexOf(beSearch) !== -1) {
+        this.currentProductList.push(item);
+      }
+    });
+
+    this.changePage(1);
+    this.setPage();
   }
 
 
