@@ -7,6 +7,12 @@
   }
 }
 
+@import "toastr";
+
+#toast-container > div {
+  opacity:1;
+}
+
 .header {
   position: relative;
 }

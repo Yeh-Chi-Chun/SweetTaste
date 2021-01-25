@@ -1,5 +1,7 @@
-import { GetDataService } from './../get-data.service';
+import { ToastrService } from 'ngx-toastr';
+import { GetDataService, Product } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
+
 
 
 @Component({
@@ -12,19 +14,33 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProductComponent implements OnInit {
 
-  constructor(private dataService: GetDataService) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
 
-  productList: any[] = [];
-  currentProductList: any[] = [];
-  disPlayProductList: any[] = [];
+  productList: Product[] = [];
+  currentProductList: Product[] = [];
+  disPlayProductList: Product[] = [];
   pageArray: number[] = [];
   currentClass = '甜點';
   currentPageNum = 1;
   pageSize = 4;
   currentPage = 0;
 
+  addProduct(product: Product): void {
+    const newitem =
+    {
+      productName: product.productName,
+      productPrice: product.productPrice,
+      productPic: product.productPic,
+      amount: 1,
+      totalAmount: 0
+    };
+    localStorage.setItem(product.productName, JSON.stringify(newitem));
+    this.toastr.success('成功', '加入購物車');
+    console.log("成功加入購物車");
+
+  }
   // 拿商品資料並設定初始值
-  setData(data: any): void {
+  setData(data: Product[]): void {
     this.productList = data;
     this.currentPage = Math.floor(this.productList.length / this.pageSize + 1);
     this.currentProductList = this.productList;
@@ -58,7 +74,7 @@ export class ProductComponent implements OnInit {
       case 'newList': {
         this.currentClass = '新品上市';
         this.productList.forEach(item => {
-          if (item['newList'] === '1') {
+          if (item.newList === '1') {
             this.currentProductList.push(item);
           }
         });
@@ -69,7 +85,7 @@ export class ProductComponent implements OnInit {
       case 'popular': {
         this.currentClass = '人氣推薦';
         this.productList.forEach(item => {
-          if (item['popular'] === '1') {
+          if (item.popular === '1') {
             this.currentProductList.push(item);
           }
         });
@@ -80,7 +96,7 @@ export class ProductComponent implements OnInit {
       case 'featured': {
         this.currentClass = '本日精選';
         this.productList.forEach(item => {
-          if (item['featured'] === '1') {
+          if (item.featured === '1') {
             this.currentProductList.push(item);
           }
         });
@@ -91,7 +107,7 @@ export class ProductComponent implements OnInit {
       case 'isCake': {
         this.currentClass = '蛋糕';
         this.productList.forEach(item => {
-          if (item['isCake'] === '1') {
+          if (item.isCake === '1') {
             console.log(item);
             this.currentProductList.push(item);
           }
@@ -103,7 +119,7 @@ export class ProductComponent implements OnInit {
       case 'isSweets': {
         this.currentClass = '點心';
         this.productList.forEach(item => {
-          if (item['isSweets'] === '1') {
+          if (item.isSweets === '1') {
             this.currentProductList.push(item);
           }
         });
@@ -127,7 +143,7 @@ export class ProductComponent implements OnInit {
   searchProduct(beSearch: string): void {
     this.currentProductList = [];
     this.productList.forEach(item => {
-      if (item['productName'].indexOf(beSearch) !== -1) {
+      if (item.productName.indexOf(beSearch) !== -1) {
         this.currentProductList.push(item);
       }
     });
@@ -139,9 +155,8 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('start get product data...');
-    this.dataService.getProductData().subscribe(value => this.setData(value))
+    this.dataService.getProductData().subscribe(value => this.setData(value));
   }
-
 }
 
 

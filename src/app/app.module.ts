@@ -1,5 +1,6 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { GetDataService } from './get-data.service';
-
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +37,8 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     AppRoutingModule
   ],
   providers: [GetDataService],
