@@ -22,10 +22,10 @@ export class ManageComponent implements OnInit {
   sendData(): void {
     const newitem =
     {
-      productName: this.sentName,
-      productPrice: this.sentPrice,
+      productName: this.sentName || '',
+      productPrice: this.sentPrice || '',
       productPic: '',
-      reserve: this.sentReserve,
+      reserve: this.sentReserve || '',
       newList: '1',
       popular: '1',
       featured: '1',
@@ -33,6 +33,7 @@ export class ManageComponent implements OnInit {
       isSweets: '0'
     };
 
+    console.log(newitem);
     this.dataService.sentProductData(JSON.stringify(newitem));
   }
 

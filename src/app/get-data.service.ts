@@ -17,9 +17,9 @@ export class GetDataService {
 
   sentProductData(body: string) {
 
-    const productUrl = 'http://localhost:8080/product';
+    const productUrl = 'http://localhost:8080/sentProduct';
 
-    return this.http.post(productUrl, body);
+    return this.http.post(productUrl, body).subscribe();
   }
 }
 

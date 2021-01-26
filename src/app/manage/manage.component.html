@@ -131,14 +131,14 @@
             </thead>
             <tbody>
               <tr>
-                <td><input class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
-                <td><input class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
-                <td><input class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
+                <td><input [(ngModel)]="sentName" class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
+                <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
+                <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text" placeholder="請輸入" ></td>
                 <td></td>
                 <td>
                   <div class="btn-group mr-2">
                     <button type="button" class="btn btn-sm btn-outline-secondary">照片上傳</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">新增</button>
+                    <button on-click="sendData()" type="button" class="btn btn-sm btn-outline-secondary">新增</button>
                   </div>
                 </td>
               </tr>
