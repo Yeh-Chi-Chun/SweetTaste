@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { GetDataService, Product } from '../get-data.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { GetDataService, Product } from '../get-data.service';
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private dataService: GetDataService) { }
+  constructor(private dataService: GetDataService,private toastr: ToastrService) { }
 
   productList: Product[] = [];
   sentName = '';
@@ -35,6 +36,10 @@ export class ManageComponent implements OnInit {
 
     console.log(newitem);
     this.dataService.sentProductData(JSON.stringify(newitem));
+    this.sentName = '';
+    this.sentPrice = '';
+    this.sentReserve = '';
+    this.toastr.success('成功傳送');
   }
 
   ngOnInit(): void {
