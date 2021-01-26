@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetDataService, Product } from './../get-data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-carts',
@@ -9,7 +10,7 @@ import { GetDataService, Product } from './../get-data.service';
 export class CartsComponent implements OnInit {
 
 
-  constructor(private dataService: GetDataService) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
 
 
   cartsProduct: CartsProduct[] = [];
@@ -38,6 +39,43 @@ export class CartsComponent implements OnInit {
     console.log(removed);
   }
 
+  addAmount(productName: string): void {
+    let addIndex = 0;
+    localStorage.removeItem(productName);
+
+    for (let i = 0; i < this.cartsProduct.length; i++) {
+      if (this.cartsProduct[i].productName === productName) {
+        addIndex = i;
+      }
+    }
+    if (this.cartsProduct[addIndex].amount < this.cartsProduct[addIndex].reserve) {
+      this.cartsProduct[addIndex].amount++;
+    }
+    else {
+      this.toastr.info('已達到庫存上限');
+    }
+
+    localStorage.setItem(productName, JSON.stringify(this.cartsProduct[addIndex]));
+
+  }
+
+  reduceAmount(productName: string): void {
+    let reduceIndex = 0;
+    localStorage.removeItem(productName);
+
+    for (let i = 0; i < this.cartsProduct.length; i++) {
+      if (this.cartsProduct[i].productName === productName) {
+        reduceIndex = i;
+      }
+    }
+    if (this.cartsProduct[reduceIndex].amount > 0) {
+      this.cartsProduct[reduceIndex].amount--;
+    }
+
+    localStorage.setItem(productName, JSON.stringify(this.cartsProduct[reduceIndex]));
+
+  }
+
 
 
   ngOnInit(): void {
@@ -55,6 +93,6 @@ export interface CartsProduct {
   productName: string;
   productPrice: number;
   productPic: string;
+  reserve: number;
   amount: 1;
-  totalAmount: 0;
 }

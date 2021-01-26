@@ -31,12 +31,12 @@ export class ProductComponent implements OnInit {
       productName: product.productName,
       productPrice: product.productPrice,
       productPic: product.productPic,
-      amount: 1,
-      totalAmount: 0
+      reserve: product.reserve,
+      amount: 1
     };
     localStorage.setItem(product.productName, JSON.stringify(newitem));
-    this.toastr.success('成功', '加入購物車');
-    console.log("成功加入購物車");
+    this.toastr.success('成功加入購物車');
+    console.log('成功加入購物車');
 
   }
   // 拿商品資料並設定初始值

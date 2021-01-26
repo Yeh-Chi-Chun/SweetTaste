@@ -16,12 +16,12 @@
             <div class="ml-md-auto mt-3 mt-md-0" style="width: 145px;">
               <div class="input-group carts-input-group">
                 <div class="input-group-prepend">
-                  <button type="button"
+                  <button on-click='reduceAmount(item.productName)' type="button"
                     class="btn btn-brand-light text-primary-light material-icons text-base-size">remove</button>
                 </div>
                 <input type="text" class="form-control" value={{item.amount}}>
                 <div class="input-group-append">
-                  <button type="button"
+                  <button on-click='addAmount(item.productName)' type="button"
                     class="btn btn-brand-light text-primary-light material-icons text-base-size">add</button>
                 </div>
               </div>
