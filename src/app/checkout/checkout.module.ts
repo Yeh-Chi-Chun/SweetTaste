@@ -18,7 +18,8 @@ import { CheckoutComponent } from './checkout.component';
   ],
   imports: [
     CommonModule,
-    CheckoutRoutingModule
+    CheckoutRoutingModule,
+    RouterModule
   ]
 })
 export class CheckoutModule { }

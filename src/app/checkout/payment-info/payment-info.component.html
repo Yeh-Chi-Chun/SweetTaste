@@ -1,1 +1,50 @@
-<p>payment-info works!</p>
+<div class="col-lg-8">
+  <div class="bg-primary text-white p-3">
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <span class="h1">運送</span>
+      </div>
+      <div class="col-6"></div>
+    </div>
+    <div class="form-group">
+      <label for="cardnum" class="h4">信用卡卡號</label>
+      <input type="text" class="form-control form-control-lg" id="cardnum" placeholder="9012-3456-7890-1234">
+    </div>
+
+    <label for="lastname" class="h4">持卡人姓名</label>
+    <div class="form-row">
+      <div class="col-6">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-lg" id="lastname" placeholder="王">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <input type="text" class="form-control form-control-lg" id="firstname" placeholder="小明">
+        </div>
+      </div>
+    </div>
+    <label for="validdate" class="h4">有效期限</label>
+    <div class="form-row">
+      <div class="col-6">
+        <div class="form-group">
+          <select name id="validdate" class="form-control form-control-lg">
+            <option value="">月</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <select class="form-control form-control-lg">
+            <option value="">年</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="secno">安全碼</label>
+      <input type="text" id="secno" class="form-control form-control-lg" placeholder="123">
+    </div>
+  </div>
+  <a type="button" [routerLink]="['..','receipt-info']" class="btn btn-yellow btn-lg btn-block">下一步</a>
+</div>

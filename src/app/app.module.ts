@@ -1,3 +1,5 @@
+import { FormsModule } from '@angular/forms';
+import { FrontComponent } from './front/front.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { GetDataService } from './get-data.service';
@@ -14,7 +16,6 @@ import { RegisterComponent } from './register/register.component';
 import { SuccessComponent } from './success/success.component';
 import { ManageComponent } from './manage/manage.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +28,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     RegisterComponent,
     SuccessComponent,
     ManageComponent,
-    //CheckoutComponent
-
+    FrontComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [GetDataService],

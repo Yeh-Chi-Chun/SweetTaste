@@ -9,10 +9,17 @@ export class GetDataService {
 
   constructor(private http: HttpClient) { }
 
-  getProductData(){
+  getProductData() {
     const productUrl = 'http://localhost:8080/product';
 
     return this.http.get<Product[]>(productUrl);
+  }
+
+  sentProductData(body: string) {
+
+    const productUrl = 'http://localhost:8080/product';
+
+    return this.http.post(productUrl, body);
   }
 }
 

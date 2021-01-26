@@ -1,3 +1,4 @@
+import { FrontComponent } from './front/front.component';
 import { ReceiptInfoComponent } from './checkout/receipt-info/receipt-info.component';
 import { PaymentInfoComponent } from './checkout/payment-info/payment-info.component';
 import { CustomerInfoComponent } from './checkout/customer-info/customer-info.component';
@@ -14,23 +15,24 @@ import { CartsComponent } from './carts/carts.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'home-page', component: HomePageComponent },
-  { path: 'carts', component: CartsComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'manage', component: ManageComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'success', component: SuccessComponent },
-  // {
-  //   path: 'checkout', component: CheckoutComponent,
-  //   children: [
-  //     { path: 'customer-info', component: CustomerInfoComponent },
-  //     { path: 'payment-info', component: PaymentInfoComponent },
-  //     { path: 'receipt-info', component: ReceiptInfoComponent }
-  //   ]
-  // },
 
-  { path: '**', redirectTo: 'home-page', pathMatch: 'full' }
+  { path: '', redirectTo: 'front/home-page', pathMatch: 'full' },
+  {
+    path: 'front', component: FrontComponent,
+    children: [
+      { path: '', component: HomePageComponent },
+      { path: 'home-page', component: HomePageComponent },
+      { path: 'carts', component: CartsComponent },
+      { path: 'product', component: ProductComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'success', component: SuccessComponent },
+      { path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule) }
+    ]
+  },
+
+  { path: 'manage', component: ManageComponent },
+
+  { path: '**', redirectTo: 'front/home-page', pathMatch: 'full' }
 ];
 
 
