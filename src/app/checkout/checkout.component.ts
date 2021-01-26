@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CartsProduct } from '../carts/carts.component';
 import { GetDataService, Product } from '../get-data.service';
 
 @Component({
@@ -28,17 +27,23 @@ export class CheckoutComponent implements OnInit {
 
   countAmount(): void {
     this.totalAmount = 0;
-    for (let i = 0; i < this.cartsProduct.length; i++) {
-      console.log(typeof (this.totalAmount));
-      console.log(typeof (this.cartsProduct[i].productPrice));
 
-      this.totalAmount = this.totalAmount + parseInt(this.cartsProduct[i].productPrice) * this.cartsProduct[i].amount;
-
-    }
+    this.cartsProduct.forEach(item => {
+      this.totalAmount = this.totalAmount + item.productPrice * item.amount;
+    });
   }
 
   ngOnInit(): void {
     this.dataService.getProductData().subscribe(value => this.getLocalStorage(value));
   }
 
+}
+
+export interface CartsProduct {
+
+  productName: string;
+  productPrice: number;
+  productPic: string;
+  reserve: number;
+  amount: 1;
 }

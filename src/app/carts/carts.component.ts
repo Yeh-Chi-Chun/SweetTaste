@@ -81,13 +81,12 @@ export class CartsComponent implements OnInit {
 
   countAmount(): void {
     this.totalAmount = 0;
-    for (let i = 0; i < this.cartsProduct.length; i++) {
-      console.log(typeof (this.totalAmount));
-      console.log(typeof (this.cartsProduct[i].productPrice));
 
-      this.totalAmount = this.totalAmount + parseInt(this.cartsProduct[i].productPrice) * this.cartsProduct[i].amount;
+    this.cartsProduct.forEach(item => {
+      this.totalAmount = this.totalAmount + item.productPrice * item.amount;
 
-    }
+    });
+
   }
 
 
@@ -105,7 +104,7 @@ export class CartsComponent implements OnInit {
 export interface CartsProduct {
 
   productName: string;
-  productPrice: string;
+  productPrice: number;
   productPic: string;
   reserve: number;
   amount: 1;

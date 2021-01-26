@@ -9,7 +9,7 @@ import { GetDataService, Product } from '../get-data.service';
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private dataService: GetDataService,private toastr: ToastrService) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
 
   productList: Product[] = [];
   sentName = '';
