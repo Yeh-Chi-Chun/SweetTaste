@@ -9,6 +9,12 @@ export class GetDataService {
 
   constructor(private http: HttpClient) { }
 
+  loginApi(body: string) {
+    const productUrl = 'http://localhost:8080/login';
+
+    return this.http.post(productUrl, body, { responseType: 'json' });
+  }
+
   getProductData() {
     const productUrl = 'http://localhost:8080/product';
 
@@ -17,10 +23,24 @@ export class GetDataService {
 
   sentProductData(body: string) {
 
-    const productUrl = 'http://localhost:8080/sentProduct';
+    const productUrl = 'http://localhost:8080/insertProduct';
 
-    return this.http.post(productUrl, body).subscribe();
+    return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
   }
+
+  delProductData(body: string) {
+
+    const productUrl = 'http://localhost:8080/delProduct';
+
+    return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
+  }
+  updateProductData(body: string) {
+
+    const productUrl = 'http://localhost:8080/updateProduct';
+
+    return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
+  }
+
 }
 
 // 其他component都能用
@@ -35,6 +55,12 @@ export interface Product {
   featured: string;
   isCake: string;
   isSweets: string;
+}
+
+export interface LoginObj {
+
+  status: string;
+  message: string;
 }
 
 export class Product {
