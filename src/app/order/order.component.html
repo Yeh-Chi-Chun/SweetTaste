@@ -36,73 +36,36 @@
       <thead>
         <tr>
           <td *ngFor="let item of myOrder">
-            <button  type="button" class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
+            <button on-click="selectOrder(item.oid)"  type="button" class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
           </td>
           <td></td>
         </tr>
         <tr>
-          <th>商品</th>
-          <th>庫存</th>
-          <th>價錢</th>
-          <th>其他</th>
-          <th>
-
-          </th>
+          <th>姓名</th>
+          <th>email</th>
+          <th>電話</th>
+          <th>地址</th>
+          <th>總額</th>
+          <th>訂單狀態</th>
         </tr>
       </thead>
       <tbody>
-
-        <!-- <ng-container *ngIf="edit">
-        <ng-container *ngIf="insert; else elseTemplate">
-          <tr>
-            <td><input  class="form-control form-control-dark w-100" type="text"
-                placeholder="輸入商品名稱"></td>
-            <td><input  class="form-control form-control-dark w-100" type="text"
-                placeholder="請輸入庫存"></td>
-            <td><input  class="form-control form-control-dark w-100" type="text"
-                placeholder="請輸入價格"></td>
-            <td></td>
-            <td>
-              <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
-                <button  type="button"
-                  class="btn btn-sm btn-outline-secondary">確認新增</button>
-              </div>
-            </td>
-          </tr>
-        </ng-container>
-
-        <ng-template #elseTemplate>
-          <tr>
-            <td></td>
-            <td><input  class="form-control form-control-dark w-100" type="text"
-                placeholder="請輸入修改庫存"></td>
-            <td><input  class="form-control form-control-dark w-100" type="text"
-                placeholder="請輸入修改價格"></td>
-            <td></td>
-            <td>
-              <div class="btn-group mr-2">
-                <button  type="button" class="btn btn-sm btn-outline-secondary">確認修改</button>
-              </div>
-            </td>
-          </tr>
-        </ng-template> -->
-
-
-
+        <tr>
+          <td>{{orderNow.userName}}</td>
+          <td>{{orderNow.email}}</td>
+          <td>{{orderNow.phoneNumber}}</td>
+          <td>{{orderNow.address}}</td>
+          <td>{{orderNow.amount}}</td>
+          <td>{{orderNow.delStatus}}</td>
+        </tr>
+        <tr>
+          <th>商品</th>
+          <th>數量</th>
+        </tr>
 
         <tr>
           <td></td>
           <td></td>
-          <td></td>
-          <td>其他屬性</td>
-          <td>
-            <div class="btn-group mr-2">
-              <button  type="button" class="btn btn-sm btn-outline-secondary">修改</button>
-              <button  type="button"
-                class="btn btn-sm btn-outline-secondary">刪除</button>
-            </div>
-          </td>
         </tr>
 
       </tbody>

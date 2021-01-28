@@ -15,10 +15,21 @@ export class OrderComponent implements OnInit {
   loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   orderProductList: OrderProduct[] = [];
   myOrder: Order[] = [];
-  orderNow?: Order;
   userName = '';
   edit = 0;
   insert = 0;
+  orderNow: Order =
+    {
+      name: '',
+      email: '',
+      phoneNumber: '',
+      userName: '',
+      address: '',
+      amount: '',
+      delStatus: '',
+      oid: ''
+    };
+
 
   constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
 
@@ -69,6 +80,10 @@ export class OrderComponent implements OnInit {
         this.orderNow = item;
       }
     });
+  }
+
+  searchOrderProduct(selectOid: string): void {
+
   }
 
 
