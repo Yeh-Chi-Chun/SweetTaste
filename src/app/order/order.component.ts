@@ -14,7 +14,9 @@ export class OrderComponent implements OnInit {
   temp = sessionStorage.getItem('loginData') || '';
   loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   orderProductList: OrderProduct[] = [];
+  currentOrderProduct: OrderProduct[] = [];
   myOrder: Order[] = [];
+
   userName = '';
   edit = 0;
   insert = 0;
@@ -80,9 +82,20 @@ export class OrderComponent implements OnInit {
         this.orderNow = item;
       }
     });
+
+    this.searchOrderProduct(this.orderNow.oid);
   }
 
   searchOrderProduct(selectOid: string): void {
+    this.currentOrderProduct = [];
+    this.orderProductList.forEach(item => {
+      if (item.oid === selectOid) {
+        this.currentOrderProduct.push(item);
+      }
+
+    });
+
+    console.log(this.currentOrderProduct);
 
   }
 

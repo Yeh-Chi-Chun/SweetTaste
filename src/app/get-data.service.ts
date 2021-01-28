@@ -114,8 +114,8 @@ export interface Order {
 export interface OrderProduct {
 
   oid: string;
-  product: string;
-  productAmount: string;
+  productName: string;
+  amount: string;
 
 }
 
