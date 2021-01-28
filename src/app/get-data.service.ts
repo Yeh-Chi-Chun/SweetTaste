@@ -74,6 +74,13 @@ export class GetDataService {
     return this.http.get<OrderProduct[]>(productUrl);
   }
 
+  updateOrder(body: string) {
+
+    const productUrl = 'http://localhost:8080/updateOrder';
+
+    return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
+  }
+
 }
 
 // 其他component都能用

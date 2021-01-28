@@ -17,6 +17,7 @@ import { SuccessComponent } from './success/success.component';
 import { ManageComponent } from './manage/manage.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { OrderComponent } from './order/order.component';
+import { OrderManageComponent } from './order-manage/order-manage.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { OrderComponent } from './order/order.component';
     ManageComponent,
     FrontComponent,
     OrderComponent,
-    OrderComponent
+    OrderComponent,
+    OrderManageComponent,
+
   ],
   imports: [
     BrowserModule,

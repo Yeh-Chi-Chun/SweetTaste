@@ -19,18 +19,25 @@ export class HeaderComponent implements OnInit {
     this.dataService.logOut();
   }
 
-  ngOnInit(): void {
-    console.log(this.loginData.admin);
-    console.log(this.loginData.status);
+  checkAdmin() {
+    if (this.loginData) {
+      this.temp = sessionStorage.getItem('loginData') || '';
+      this.loginData = JSON.parse(this.temp);
+      if (this.loginData.admin === '1') {
+        this.loginAdmin = 1;
+      }
+      else {
+        this.loginAdmin = 0;
+      }
+    }
 
-    if (this.loginData.admin === '1') {
-      this.loginAdmin = 1;
-    }
-    else {
-      this.loginAdmin = 0;
-    }
-    console.log(this.loginstatus);
-    console.log(this.loginAdmin);
+  }
+
+  ngOnInit(): void {
+    this.checkAdmin();
+
+
+
   }
 
 }

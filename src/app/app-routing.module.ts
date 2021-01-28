@@ -1,3 +1,4 @@
+import { OrderManageComponent } from './order-manage/order-manage.component';
 import { OrderComponent } from './order/order.component';
 import { FrontComponent } from './front/front.component';
 import { ManageComponent } from './manage/manage.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   },
 
   { path: 'manage', component: ManageComponent },
+  { path: 'orderManage', component: OrderManageComponent },
 
   { path: '**', redirectTo: 'front/home-page', pathMatch: 'full' }
 ];

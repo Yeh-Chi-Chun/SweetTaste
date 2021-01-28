@@ -20,7 +20,7 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="#">Sign out</a>
+        <a class="nav-link" on-click="logOut()">Sign out</a>
       </li>
     </ul>
   </nav>
@@ -42,7 +42,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="/orderManage">
+              <a class="nav-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="feather feather-file">
@@ -53,7 +53,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link" routerLink="/manage">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="feather feather-shopping-cart">
@@ -83,7 +83,7 @@
         </div>
       </nav>
 
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <main role="main" class="col-md-10 ml-sm-auto px-4">
         <div class="chartjs-size-monitor"
           style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
           <div class="chartjs-size-monitor-expand"
@@ -97,20 +97,10 @@
         </div>
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom mt-5">
-          <h1 class="h2">商品</h1>
+          <h1 class="h2">訂單</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
 
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                class="feather feather-calendar">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              This week
-            </button>
+
           </div>
         </div>
 
@@ -120,95 +110,61 @@
           <table class="table table-striped table-sm">
             <thead>
               <tr>
-                <th>商品</th>
-                <th>庫存</th>
-                <th>價錢</th>
-                <th>其他</th>
+                <td *ngFor="let item of myOrder">
+                  <button on-click="selectOrder(item.oid)" type="button"
+                    class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>姓名</th>
+                <th>email</th>
+                <th>電話</th>
+                <th>地址</th>
+                <th>總額</th>
+                <th>訂單狀態</th>
                 <th>
-                  <button on-click="openInsert()" type="button" class="btn btn-sm btn-outline-secondary">新增商品</button>
+                  <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-secondary">修改訂單</button>
+                  <ng-container *ngIf="edit">
+                    <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-secondary">確定修改</button>
+                  </ng-container>
                   <button on-click="edit=0" type="button" class="btn btn-sm btn-outline-secondary">取消</button>
                 </th>
               </tr>
             </thead>
             <tbody>
-
-              <ng-container *ngIf="edit">
-              <ng-container *ngIf="insert; else elseTemplate">
-                <tr>
-                  <td><input [(ngModel)]="sentName" class="form-control form-control-dark w-100" type="text"
-                      placeholder="輸入商品名稱"></td>
-                  <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入庫存"></td>
-                  <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入價格"></td>
-                  <td></td>
+              <tr>
+                <td>{{orderNow.userName}}</td>
+                <td>{{orderNow.email}}</td>
+                <td>{{orderNow.phoneNumber}}</td>
+                <td>{{orderNow.address}}</td>
+                <td>{{orderNow.amount}}</td>
+                <td>{{orderNow.delStatus}}</td>
+                <ng-container *ngIf="edit">
                   <td>
-                    <div class="btn-group mr-2">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
-                      <button on-click="insertProduct()" type="button"
-                        class="btn btn-sm btn-outline-secondary">確認新增</button>
-                    </div>
+                    <input [(ngModel)]="modifyStatus" class="form-control form-control-dark" type="text" placeholder="修改">
                   </td>
-                </tr>
-              </ng-container>
+                </ng-container>
 
-              <ng-template #elseTemplate>
-                <tr>
-                  <td>{{sentName}}</td>
-                  <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入修改庫存"></td>
-                  <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入修改價格"></td>
-                  <td></td>
-                  <td>
-                    <div class="btn-group mr-2">
-                      <button on-click="updateProduct()" type="button" class="btn btn-sm btn-outline-secondary">確認修改</button>
-                    </div>
-                  </td>
-                </tr>
-              </ng-template>
-
-                <tr>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('newList')"  class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true">
-                    <label class="form-check-label" for="inlineCheckbox1">新品</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('popular')"  class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
-                    <label class="form-check-label" for="inlineCheckbox2">受歡迎</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('featured')" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">精選</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox4">蛋糕類</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox5">甜點類</label>
-                  </div>
-                </tr>
-              </ng-container>
-
-
-              <tr *ngFor="let item of productList">
-                <td>{{item.productName}}</td>
-                <td>{{item.reserve}}</td>
-                <td>{{item.productPrice}}</td>
-                <td>其他屬性</td>
-                <td>
-                  <div class="btn-group mr-2">
-                    <button on-click="openUpdate(item.productName)" type="button" class="btn btn-sm btn-outline-secondary">修改</button>
-                    <button on-click="delProduct(item.productName)" type="button"
-                      class="btn btn-sm btn-outline-secondary">刪除</button>
-                  </div>
-                </td>
               </tr>
-
             </tbody>
           </table>
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>商品</th>
+                <th>數量</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let i of currentOrderProduct">
+                <td>{{i.productName}}</td>
+                <td>{{i.amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
         </div>
       </main>
     </div>
@@ -240,3 +196,4 @@
 </body>
 
 </html>
+

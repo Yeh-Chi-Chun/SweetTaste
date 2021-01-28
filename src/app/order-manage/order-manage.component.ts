@@ -1,14 +1,16 @@
-import { GetDataService, LoginObj, Order, OrderProduct } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { GetDataService, LoginObj, Order, OrderProduct } from '../get-data.service';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  selector: 'app-order-manage',
+  templateUrl: './order-manage.component.html',
+  styleUrls: ['./order-manage.component.css']
 })
-export class OrderComponent implements OnInit {
+export class OrderManageComponent implements OnInit {
+
+  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
 
   orderList: Order[] = [];
   temp = sessionStorage.getItem('loginData') || '';
@@ -16,6 +18,7 @@ export class OrderComponent implements OnInit {
   orderProductList: OrderProduct[] = [];
   currentOrderProduct: OrderProduct[] = [];
   myOrder: Order[] = [];
+  modifyStatus='';
 
   userName = '';
   edit = 0;
@@ -32,8 +35,25 @@ export class OrderComponent implements OnInit {
       oid: ''
     };
 
+    updateOrder() {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+      const newitem =
+      {
+        name: this.orderNow.name,
+        email: this.orderNow.email,
+        userName: this.orderNow.userName,
+        phoneNumber: this.orderNow.phoneNumber,
+        address: this.orderNow.address,
+        amount: this.orderNow.amount,
+        delStatus: this.modifyStatus,
+        oid: this.orderNow.amount
+      }
+
+      this.dataService.updateOrder(JSON.parse(JSON.stringify(newitem)));
+      this.toastr.success("成功送出訂單")
+    }
+
+
 
   setOrder(data: Order[]): void {
     this.orderList = data;
@@ -65,13 +85,7 @@ export class OrderComponent implements OnInit {
     console.log('My order:', this.myOrder);
     console.log('orderList:', this.orderList);
     this.orderList.forEach(item => {
-
-      console.log(item.userName);
-      console.log(this.userName);
-      if (item.userName === this.userName) {
-        this.myOrder.push(item);
-      }
-      console.log('My order:', this.myOrder);
+      this.myOrder.push(item);
     });
 
   }
@@ -99,9 +113,35 @@ export class OrderComponent implements OnInit {
 
   }
 
+  logOut() {
+    this.dataService.logOut();
+  }
+
+  checkAdmin() {
+    if (this.loginData) {
+      this.temp = sessionStorage.getItem('loginData') || '';
+      this.loginData = JSON.parse(this.temp);
+      if (this.loginData.admin === '1') {
+        this.toastr.info('管理員你回來啦');
+      }
+      else {
+        this.toastr.info('可惜你不是管理員~');
+        this.route.navigateByUrl('/front/register');
+      }
+
+    }
+    else {
+      this.toastr.info('您還沒登入喔', '趕快去登入吧');
+      this.route.navigateByUrl('/front/register');
+
+    }
+  }
+
 
 
   ngOnInit(): void {
+
+    this.checkAdmin();
 
     this.dataService.getOrderProduct().subscribe(value => {
       this.setorderProduct(value);
@@ -110,9 +150,6 @@ export class OrderComponent implements OnInit {
         this.getUserName();
       });
     });
-
-
-
   }
 
 }

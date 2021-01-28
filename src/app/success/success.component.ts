@@ -46,9 +46,6 @@ export class SuccessComponent implements OnInit {
       oid: this.oid
     }
 
-
-
-
     this.dataService.sendOrder(JSON.parse(JSON.stringify(newitem)));
     this.toastr.success("成功送出訂單")
   }
@@ -66,7 +63,6 @@ export class SuccessComponent implements OnInit {
       this.dataService.sendOrderProduct(JSON.parse(JSON.stringify(newitem)));
     });
 
-    this.toastr.success("成功送出訂單2")
   }
 
   checkOrder() {
