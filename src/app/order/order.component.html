@@ -1,0 +1,111 @@
+<main role="main" class=" ml-sm-auto px-4">
+  <div class="chartjs-size-monitor"
+    style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+    <div class="chartjs-size-monitor-expand"
+      style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+    </div>
+    <div class="chartjs-size-monitor-shrink"
+      style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+      <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+    </div>
+  </div>
+  <div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom mt-5">
+    <h1 class="h2">商品</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+      <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        This week
+      </button>
+    </div>
+  </div>
+
+
+
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <td *ngFor="let item of myOrder">
+            <button  type="button" class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>商品</th>
+          <th>庫存</th>
+          <th>價錢</th>
+          <th>其他</th>
+          <th>
+
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- <ng-container *ngIf="edit">
+        <ng-container *ngIf="insert; else elseTemplate">
+          <tr>
+            <td><input  class="form-control form-control-dark w-100" type="text"
+                placeholder="輸入商品名稱"></td>
+            <td><input  class="form-control form-control-dark w-100" type="text"
+                placeholder="請輸入庫存"></td>
+            <td><input  class="form-control form-control-dark w-100" type="text"
+                placeholder="請輸入價格"></td>
+            <td></td>
+            <td>
+              <div class="btn-group mr-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
+                <button  type="button"
+                  class="btn btn-sm btn-outline-secondary">確認新增</button>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <tr>
+            <td></td>
+            <td><input  class="form-control form-control-dark w-100" type="text"
+                placeholder="請輸入修改庫存"></td>
+            <td><input  class="form-control form-control-dark w-100" type="text"
+                placeholder="請輸入修改價格"></td>
+            <td></td>
+            <td>
+              <div class="btn-group mr-2">
+                <button  type="button" class="btn btn-sm btn-outline-secondary">確認修改</button>
+              </div>
+            </td>
+          </tr>
+        </ng-template> -->
+
+
+
+
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>其他屬性</td>
+          <td>
+            <div class="btn-group mr-2">
+              <button  type="button" class="btn btn-sm btn-outline-secondary">修改</button>
+              <button  type="button"
+                class="btn btn-sm btn-outline-secondary">刪除</button>
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</main>

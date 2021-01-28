@@ -19,7 +19,7 @@ export class CustomerInfoComponent implements OnInit {
     const newitem =
     {
       name: this.name,
-      phone: this.phone,
+      phone: this.phone.toString(),
       address: this.address
     };
 

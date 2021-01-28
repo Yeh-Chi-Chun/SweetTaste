@@ -1,47 +1,47 @@
-<div class="container my-lg-5">
+<section class="container">
   <div class="row">
-
+    <div class="col-lg-8">
       <router-outlet></router-outlet>
-
-      <div class="col-lg-4 d-none d-lg-block text-primary-light">
-          <div class="card mb-3">
-              <div class="card-header text-center bg-primary-lighter">
-                  <div class="h3">訂單摘要</div>
-              </div>
-              <div class="card-body">
-                  <div class="d-flex justify-content-between mb-2">
-                      <span>小計</span>
-                      <span>NT$ {{totalAmount}}</span>
-                  </div>
-                  <div class="d-flex justify-content-between mb-2">
-                      <span>運費</span>
-                      <span>NT$ 30</span>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <span class="h4">總計</span>
-                      <strong class="h4">NT$ {{totalAmount+30}}</strong>
-                  </div>
-              </div>
-          </div>
-          <div class="card border-primary-lighter">
-              <div class="card-header text-center bg-primary-lighter">
-                  <div class="h3">購物清單</div>
-              </div>
-              <div class="card-body" *ngFor="let item of cartsProduct">
-                  <div class="d-flex mt-3" >
-                      <div class="cart-image cart-image-sm mr-3"
-                          style="background-image: url({{item.productPic}})">
-                      </div>
-                      <div class="d-flex align-items-center">
-                          <div class="flex-fill mr-lg-4 text-primary-light">
-                              <span class="h5">{{item.productName}} ({{item.amount}})</span><br>
-                              <span>NT$ {{item.productPrice*item.amount}}</span>
-                          </div>
-                      </div>
-                  </div>
-
-              </div>
-          </div>
-      </div>
-
     </div>
+
+    <div class="col-lg-4 d-none d-lg-block text-primary-light">
+      <div class="card mb-3">
+        <div class="card-header text-center bg-primary-lighter">
+          <div class="h3">訂單摘要</div>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between mb-2">
+            <span>小計</span>
+            <span>NT$ {{totalAmount}}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <span>運費</span>
+            <span>NT$ 30</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span class="h4">總計</span>
+            <strong class="h4">NT$ {{totalAmount+30}}</strong>
+          </div>
+        </div>
+      </div>
+      <div class="card border-primary-lighter">
+        <div class="card-header text-center bg-primary-lighter">
+          <div class="h3">購物清單</div>
+        </div>
+        <div class="card-body" *ngFor="let item of cartsProduct">
+          <div class="d-flex mt-3">
+            <div class="cart-image cart-image-sm mr-3" style="background-image: url({{item.productPic}})">
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="flex-fill mr-lg-4 text-primary-light">
+                <span class="h5">{{item.productName}} ({{item.amount}})</span><br>
+                <span>NT$ {{item.productPrice*item.amount}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

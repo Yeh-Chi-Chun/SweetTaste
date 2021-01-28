@@ -1,5 +1,5 @@
 import { logging } from 'protractor';
-import { LoginObj } from './../get-data.service';
+import { GetDataService, LoginObj } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,15 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  loginData: LoginObj = JSON.parse(JSON.stringify(sessionStorage.getItem('loginData')));
+  temp = sessionStorage.getItem('loginData') || '';
+  loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   loginAdmin = 0;
   loginstatus = 0;
 
-  constructor() { }
+  constructor(private dataService: GetDataService) { }
+
+  logOut() {
+    this.dataService.logOut();
+  }
 
   ngOnInit(): void {
-    this.loginData = JSON.parse(JSON.stringify(sessionStorage.getItem('loginData')));
     console.log(this.loginData.admin);
     console.log(this.loginData.status);
 

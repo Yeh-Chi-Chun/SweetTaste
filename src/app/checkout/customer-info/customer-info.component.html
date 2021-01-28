@@ -1,28 +1,31 @@
-<div class="col-lg-8 box">
+<div>
   <div class="bg-primary text-white p-3">
-      <div class="form-row mb-3">
-          <div class="col-6">
-              <span class="h1">運送</span>
-          </div>
-          <div class="col-6"></div>
+    <div class="form-row mb-3">
+      <div class="col-6">
+        <span class="h1">運送</span>
       </div>
-      <div class="form-row">
-          <div class="col-6">
-              <div class="form-group">
-                  <label for="lastname" class="h4">姓名</label>
-                  <input [(ngModel)]="name" type="text" class="form-control form-control-lg" id="lastname" placeholder="王" value="王小明">
-              </div>
-          </div>
+      <div class="col-6"></div>
+    </div>
+    <div class="form-row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="lastname" class="h4">姓名</label>
+          <input [(ngModel)]="name" type="text" class="form-control form-control-lg" id="lastname" placeholder="王"
+            value="王小明">
+        </div>
       </div>
-      <div class="form-group">
-          <label for="phone" class="h4">電話</label>
-          <input [(ngModel)]="phone" type="text" class="form-control form-control-lg" id="phone" placeholder="0912345678" value="0912345678">
-      </div>
-      <label for="city" class="h4">地址</label>
+    </div>
+    <div class="form-group">
+      <label for="phone" class="h4">電話</label>
+      <input [(ngModel)]="phone" type="text" class="form-control form-control-lg" id="phone" placeholder="0912345678"
+        value="0912345678">
+    </div>
+    <label for="city" class="h4">地址</label>
 
-      <div class="form-group">
-          <input [(ngModel)]="address" type="text" class="form-control form-control-lg" placeholder="幸福路520號" value="幸福路520號">
-      </div>
+    <div class="form-group">
+      <input [(ngModel)]="address" type="text" class="form-control form-control-lg" placeholder="幸福路520號"
+        value="幸福路520號">
+    </div>
+    <a type="button" on-click="saveDeliver()" class="btn btn-yellow btn-lg btn-block">下一步</a>
   </div>
-  <a type="button" on-click="saveDeliver()" class="btn btn-yellow btn-lg btn-block">下一步</a>
 </div>

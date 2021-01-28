@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { SuccessComponent } from './success/success.component';
 import { ManageComponent } from './manage/manage.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { BrowserModule } from '@angular/platform-browser';
     RegisterComponent,
     SuccessComponent,
     ManageComponent,
-    FrontComponent
+    FrontComponent,
+    OrderComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

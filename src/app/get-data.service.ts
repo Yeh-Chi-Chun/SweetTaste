@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -7,7 +9,13 @@ import { Injectable } from '@angular/core';
 })
 export class GetDataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private route: Router) { }
+
+  logOut(): void {
+    sessionStorage.removeItem('loginData');
+    this.route.navigateByUrl('/front/home');
+    this.toastr.info('已登出');
+  }
 
   loginApi(body: string) {
     const productUrl = 'http://localhost:8080/login';
@@ -43,15 +51,27 @@ export class GetDataService {
 
   sendOrder(body: string) {
 
-    const productUrl = 'http://localhost:8080/order';
+    const productUrl = 'http://localhost:8080/insertOrder';
 
     return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
   }
   sendOrderProduct(body: string) {
 
-    const productUrl = 'http://localhost:8080/orderProduct';
+    const productUrl = 'http://localhost:8080/insertOrderProduct';
 
     return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
+  }
+
+  getOrder() {
+    const productUrl = 'http://localhost:8080/getOrder';
+
+    return this.http.get<Order[]>(productUrl);
+  }
+
+  getOrderProduct() {
+    const productUrl = 'http://localhost:8080/getOrderProduct';
+
+    return this.http.get<OrderProduct[]>(productUrl);
   }
 
 }

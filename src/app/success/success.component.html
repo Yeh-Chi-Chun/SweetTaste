@@ -6,13 +6,12 @@
               <div class="d-flex justify-content-center align-items-center mb-4">
                   <img src="assets/images/lg-付款成功.svg" width="190" alt="">
               </div>
-              <a [routerLink]="['/product']" class="btn btn-yellow btn-block btn-lg py-3 d-none d-md-block btn-green-text">
+              <a on-click="checkOrder()" class="btn btn-yellow btn-block btn-lg py-3 d-none d-md-block btn-green-text">
                   確認訂單
               </a>
           </div>
       </div>
   </div>
 </div>
-<a [routerLink]="['/product']" class="btn btn-yellow btn-block btn-lg py-3 d-md-none btn-green-text">
-  確認訂單
-</a>
+
+

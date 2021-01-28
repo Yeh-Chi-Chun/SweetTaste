@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GetDataService, Product } from './../get-data.service';
+import { GetDataService, LoginObj, Product } from './../get-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carts',
@@ -10,9 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 export class CartsComponent implements OnInit {
 
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
 
-
+  temp = sessionStorage.getItem('loginData') || '';
+  loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   cartsProduct: CartsProduct[] = [];
   totalAmount = 0;
 
@@ -89,8 +91,20 @@ export class CartsComponent implements OnInit {
 
   }
 
+  checkLogin() {
 
+    if (this.loginData) {
+      this.temp = sessionStorage.getItem('loginData') || '';
+      this.loginData = JSON.parse(this.temp);
+      console.log(this.loginData.userName);
+      this.route.navigateByUrl('/front/checkout/customer-info');
 
+    }
+    else {
+      this.toastr.info('您還沒登入喔');
+      this.route.navigateByUrl('/front/register');
+    }
+  }
 
   ngOnInit(): void {
 
