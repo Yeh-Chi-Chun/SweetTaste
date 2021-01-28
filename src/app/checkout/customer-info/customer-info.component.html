@@ -9,41 +9,20 @@
       <div class="form-row">
           <div class="col-6">
               <div class="form-group">
-                  <label for="lastname" class="h4">姓氏</label>
-                  <input type="text" class="form-control form-control-lg" id="lastname" placeholder="王">
-              </div>
-          </div>
-          <div class="col-6">
-              <div class="form-group">
-                  <label for="firstname" class="h4">名</label>
-                  <input type="text" class="form-control form-control-lg" id="firstname" placeholder="小明">
+                  <label for="lastname" class="h4">姓名</label>
+                  <input [(ngModel)]="name" type="text" class="form-control form-control-lg" id="lastname" placeholder="王" value="王小明">
               </div>
           </div>
       </div>
       <div class="form-group">
           <label for="phone" class="h4">電話</label>
-          <input type="text" class="form-control form-control-lg" id="phone" placeholder="0912-345-678">
+          <input [(ngModel)]="phone" type="text" class="form-control form-control-lg" id="phone" placeholder="0912345678" value="0912345678">
       </div>
       <label for="city" class="h4">地址</label>
-      <div class="form-row">
-          <div class="col-6">
-              <div class="form-group">
-                  <select name id="city" class="form-control form-control-lg">
-                      <option value="">高雄市</option>
-                  </select>
-              </div>
-          </div>
-          <div class="col-6">
-              <div class="form-group">
-                  <select name id="city" class="form-control form-control-lg">
-                      <option value="">新興區</option>
-                  </select>
-              </div>
-          </div>
-      </div>
+
       <div class="form-group">
-          <input type="text" class="form-control form-control-lg" placeholder="幸福路520號">
+          <input [(ngModel)]="address" type="text" class="form-control form-control-lg" placeholder="幸福路520號" value="幸福路520號">
       </div>
   </div>
-  <a type="button" [routerLink]="['..','payment-info']" class="btn btn-yellow btn-lg btn-block">下一步</a>
+  <a type="button" on-click="saveDeliver()" class="btn btn-yellow btn-lg btn-block">下一步</a>
 </div>

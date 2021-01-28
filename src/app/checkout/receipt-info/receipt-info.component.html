@@ -12,12 +12,12 @@
     </nav>
     <div class="form-group">
       <label for="email" class="h4">電子郵件信箱</label>
-      <input type="text" class="form-control form-control-lg" id="email" placeholder="hello@email.com">
+      <input [(ngModel)]="email" type="text" class="form-control form-control-lg" id="email" placeholder="hello@email.com">
     </div>
     <div class="form-group">
       <label for="tno" class="h4">統一編號(選填)</label>
       <input type="text" id="tno" class="form-control form-control-lg" placeholder="123">
     </div>
   </div>
-  <a type="button" routerLink="/front/success"  class="btn btn-yellow btn-lg btn-block">下一步</a>
+  <a type="button" on-click = "saveEmail()"  class="btn btn-yellow btn-lg btn-block">下一步</a>
 </div>
