@@ -35,7 +35,7 @@ export class OrderManageComponent implements OnInit {
       oid: ''
     };
 
-  updateOrder() {
+  updateOrder(): void {
 
     const newitem =
     {
@@ -69,7 +69,7 @@ export class OrderManageComponent implements OnInit {
     console.log('all:', this.orderProductList);
   }
 
-  getUserName() {
+  getUserName(): void {
 
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
@@ -117,11 +117,11 @@ export class OrderManageComponent implements OnInit {
 
   }
 
-  logOut() {
+  logOut(): void {
     this.dataService.logOut();
   }
 
-  checkAdmin() {
+  checkAdmin(): void {
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
       this.loginData = JSON.parse(this.temp);

@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
       res => this.checkLogin(JSON.parse(JSON.stringify(res))));
   }
 
-  doRegister() {
+  doRegister(): void {
     const newitem =
     {
       userName: this.rUserName,

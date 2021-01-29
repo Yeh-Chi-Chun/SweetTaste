@@ -45,7 +45,7 @@ export class OrderComponent implements OnInit {
     console.log('all:', this.orderProductList);
   }
 
-  getUserName() {
+  getUserName(): void {
 
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
@@ -61,7 +61,7 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  searchOrder() {
+  searchOrder() : void{
     console.log('My order:', this.myOrder);
     console.log('orderList:', this.orderList);
     this.orderList.forEach(item => {
