@@ -165,7 +165,7 @@ export class ManageComponent implements OnInit {
 
   }
 
-  checkAdmin() {
+  checkAdmin(): void {
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
       this.loginData = JSON.parse(this.temp);

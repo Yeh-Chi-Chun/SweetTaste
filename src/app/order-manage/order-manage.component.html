@@ -126,7 +126,7 @@
                 <th>
                   <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-secondary">修改訂單</button>
                   <ng-container *ngIf="edit">
-                    <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-secondary">確定修改</button>
+                    <button on-click="updateOrder()" type="button" class="btn btn-sm btn-outline-secondary">確定修改</button>
                   </ng-container>
                   <button on-click="edit=0" type="button" class="btn btn-sm btn-outline-secondary">取消</button>
                 </th>

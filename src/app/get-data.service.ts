@@ -78,7 +78,14 @@ export class GetDataService {
 
     const productUrl = 'http://localhost:8080/updateOrder';
 
-    return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
+    return this.http.post(productUrl, body, { responseType: 'text' });
+  }
+
+  register(body: string) {
+
+    const productUrl = 'http://localhost:8080/register';
+
+    return this.http.post(productUrl, body, { responseType: 'text' });
   }
 
 }

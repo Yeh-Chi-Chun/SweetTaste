@@ -123,7 +123,11 @@
                 <th>商品</th>
                 <th>庫存</th>
                 <th>價錢</th>
-                <th>其他</th>
+                <th>新上架</th>
+                <th>受歡迎</th>
+                <th>精選類</th>
+                <th>蛋糕類</th>
+                <th>甜點類</th>
                 <th>
                   <button on-click="openInsert()" type="button" class="btn btn-sm btn-outline-secondary">新增商品</button>
                   <button on-click="edit=0" type="button" class="btn btn-sm btn-outline-secondary">取消</button>
@@ -133,63 +137,109 @@
             <tbody>
 
               <ng-container *ngIf="edit">
-              <ng-container *ngIf="insert; else elseTemplate">
-                <tr>
-                  <td><input [(ngModel)]="sentName" class="form-control form-control-dark w-100" type="text"
-                      placeholder="輸入商品名稱"></td>
-                  <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入庫存"></td>
-                  <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入價格"></td>
-                  <td></td>
-                  <td>
-                    <div class="btn-group mr-2">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
-                      <button on-click="insertProduct()" type="button"
-                        class="btn btn-sm btn-outline-secondary">確認新增</button>
-                    </div>
-                  </td>
-                </tr>
-              </ng-container>
+                <ng-container *ngIf="insert; else elseTemplate">
+                  <tr>
+                    <td><input [(ngModel)]="sentName" class="form-control form-control-dark w-100" type="text"
+                        placeholder="輸入商品名稱"></td>
+                    <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
+                        placeholder="請輸入庫存"></td>
+                    <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
+                        placeholder="請輸入價格"></td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('newList')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox1" value="true">
+                        <label class="form-check-label" for="inlineCheckbox1"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('popular')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox2" value="0">
+                        <label class="form-check-label" for="inlineCheckbox2"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('featured')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox4" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox4"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox5" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox5"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
+                        <button on-click="insertProduct()" type="button"
+                          class="btn btn-sm btn-outline-secondary">確認新增</button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
 
-              <ng-template #elseTemplate>
-                <tr>
-                  <td>{{sentName}}</td>
-                  <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入修改庫存"></td>
-                  <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
-                      placeholder="請輸入修改價格"></td>
-                  <td></td>
-                  <td>
-                    <div class="btn-group mr-2">
-                      <button on-click="updateProduct()" type="button" class="btn btn-sm btn-outline-secondary">確認修改</button>
-                    </div>
-                  </td>
-                </tr>
-              </ng-template>
-
-                <tr>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('newList')"  class="form-check-input" type="checkbox" id="inlineCheckbox1" value="true">
-                    <label class="form-check-label" for="inlineCheckbox1">新品</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('popular')"  class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
-                    <label class="form-check-label" for="inlineCheckbox2">受歡迎</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('featured')" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox3">精選</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox4">蛋糕類</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option3">
-                    <label class="form-check-label" for="inlineCheckbox5">甜點類</label>
-                  </div>
-                </tr>
+                <ng-template #elseTemplate>
+                  <tr>
+                    <td>{{sentName}}</td>
+                    <td><input [(ngModel)]="sentReserve" class="form-control form-control-dark w-100" type="text"
+                        placeholder="請輸入修改庫存"></td>
+                    <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
+                        placeholder="請輸入修改價格"></td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input on-click="setProperty('newList')" class="form-check-input" type="checkbox"
+                              id="inlineCheckbox1" value="true">
+                            <label class="form-check-label" for="inlineCheckbox1"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input on-click="setProperty('popular')" class="form-check-input" type="checkbox"
+                              id="inlineCheckbox2" value="0">
+                            <label class="form-check-label" for="inlineCheckbox2"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input on-click="setProperty('featured')" class="form-check-input" type="checkbox"
+                              id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox"
+                              id="inlineCheckbox4" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox4"></label>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-check form-check-inline">
+                            <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox"
+                              id="inlineCheckbox5" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox5"></label>
+                          </div>
+                        </td>
+                    <td>
+                      <div class="btn-group mr-2">
+                        <button on-click="updateProduct()" type="button"
+                          class="btn btn-sm btn-outline-secondary">確認修改</button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
               </ng-container>
 
 
@@ -197,10 +247,55 @@
                 <td>{{item.productName}}</td>
                 <td>{{item.reserve}}</td>
                 <td>{{item.productPrice}}</td>
-                <td>其他屬性</td>
+                <td>
+                  <svg *ngIf="item.newList ==='1'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                    <path
+                      d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                    <path
+                      d="M8.354 10.354l7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                  </svg>
+                </td>
+                <td>
+                  <svg *ngIf="item.popular ==='1'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                    <path
+                      d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                    <path
+                      d="M8.354 10.354l7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                  </svg>
+                </td>
+                <td>
+                  <svg *ngIf="item.featured ==='1'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                    <path
+                      d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                    <path
+                      d="M8.354 10.354l7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                  </svg>
+                </td>
+                <td>
+                  <svg *ngIf="item.isCake ==='1'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                    <path
+                      d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                    <path
+                      d="M8.354 10.354l7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                  </svg>
+                </td>
+                <td>
+                  <svg *ngIf="item.isSweets ==='1'" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                    fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                    <path
+                      d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" />
+                    <path
+                      d="M8.354 10.354l7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" />
+                  </svg>
+                </td>
                 <td>
                   <div class="btn-group mr-2">
-                    <button on-click="openUpdate(item.productName)" type="button" class="btn btn-sm btn-outline-secondary">修改</button>
+                    <button on-click="openUpdate(item.productName)" type="button"
+                      class="btn btn-sm btn-outline-secondary">修改</button>
                     <button on-click="delProduct(item.productName)" type="button"
                       class="btn btn-sm btn-outline-secondary">刪除</button>
                   </div>

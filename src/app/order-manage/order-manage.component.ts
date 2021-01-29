@@ -18,7 +18,7 @@ export class OrderManageComponent implements OnInit {
   orderProductList: OrderProduct[] = [];
   currentOrderProduct: OrderProduct[] = [];
   myOrder: Order[] = [];
-  modifyStatus='';
+  modifyStatus = '';
 
   userName = '';
   edit = 0;
@@ -35,23 +35,27 @@ export class OrderManageComponent implements OnInit {
       oid: ''
     };
 
-    updateOrder() {
+  updateOrder() {
 
-      const newitem =
-      {
-        name: this.orderNow.name,
-        email: this.orderNow.email,
-        userName: this.orderNow.userName,
-        phoneNumber: this.orderNow.phoneNumber,
-        address: this.orderNow.address,
-        amount: this.orderNow.amount,
-        delStatus: this.modifyStatus,
-        oid: this.orderNow.amount
-      }
-
-      this.dataService.updateOrder(JSON.parse(JSON.stringify(newitem)));
-      this.toastr.success("成功送出訂單")
+    const newitem =
+    {
+      name: this.orderNow.name,
+      email: this.orderNow.email,
+      userName: this.orderNow.userName,
+      phoneNumber: this.orderNow.phoneNumber,
+      address: this.orderNow.address,
+      amount: this.orderNow.amount,
+      delStatus: this.modifyStatus,
+      oid: this.orderNow.oid
     }
+
+    this.dataService.updateOrder(JSON.parse(JSON.stringify(newitem))).subscribe(mes => {
+      this.toastr.success(mes);
+      this.searchOrderProduct(this.orderNow.oid);
+    });
+    this.edit = 0;
+
+  }
 
 
 
@@ -76,12 +80,12 @@ export class OrderManageComponent implements OnInit {
       this.searchOrder();
     }
     else {
-      this.toastr.info('趕快去登入吧','您還沒登入喔');
+      this.toastr.info('趕快去登入吧', '您還沒登入喔');
       this.route.navigateByUrl('/front/register');
     }
   }
 
-  searchOrder() {
+  searchOrder(): void {
     console.log('My order:', this.myOrder);
     console.log('orderList:', this.orderList);
     this.orderList.forEach(item => {

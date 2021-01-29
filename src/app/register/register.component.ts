@@ -15,9 +15,12 @@ export class RegisterComponent implements OnInit {
 
   email = '';
   password = '';
+  rUserName = '';
+  rEmail = '';
+  rPassword = '';
 
 
-  checkLogin(loginData: LoginObj) {
+  checkLogin(loginData: LoginObj): void {
     if (loginData.status === '0') {
       this.toastr.error(loginData.message);
     }
@@ -37,7 +40,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  doLogin() {
+  doLogin(): void {
     sessionStorage.removeItem('loginData');
 
     const newitem =
@@ -52,6 +55,23 @@ export class RegisterComponent implements OnInit {
 
     this.dataService.loginApi(JSON.parse(JSON.stringify(newitem))).subscribe(
       res => this.checkLogin(JSON.parse(JSON.stringify(res))));
+  }
+
+  doRegister() {
+    const newitem =
+    {
+      userName: this.rUserName,
+      password: this.rPassword,
+      email: this.rEmail,
+      admin: '0'
+    }
+
+    this.rUserName = '';
+    this.rEmail = '';
+    this.rPassword = '';
+
+    this.dataService.register(JSON.parse(JSON.stringify(newitem))).subscribe(mes => this.toastr.success('趕快登入看看吧', mes));
+
   }
 
 
