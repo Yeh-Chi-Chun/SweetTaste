@@ -102,11 +102,12 @@ export class OrderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUserName();
+
     this.dataService.getOrderProduct().subscribe(value => {
       this.setorderProduct(value);
       this.dataService.getOrder().subscribe(res => {
         this.setOrder(res);
+        this.getUserName();
       });
     });
 

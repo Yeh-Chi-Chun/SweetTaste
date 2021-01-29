@@ -26,11 +26,11 @@
         <tr>
           <td *ngFor="let item of myOrder">
             <button on-click="selectOrder(item.oid)" type="button"
-              class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
+              class="btn btn-sm btn-outline-info">訂單: {{item.oid}}</button>
           </td>
           <td></td>
         </tr>
-        <tr>
+        <tr class="btn-outline-info">
           <th>姓名</th>
           <th>email</th>
           <th>電話</th>
@@ -60,7 +60,7 @@
       <tbody>
         <tr *ngFor="let i of currentOrderProduct">
           <td>{{i.productName}}</td>
-          <td>{{i.amount}}</td>
+          <td>{{i.amount}} 個</td>
         </tr>
       </tbody>
     </table>

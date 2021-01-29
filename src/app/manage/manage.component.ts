@@ -174,7 +174,7 @@ export class ManageComponent implements OnInit {
       }
       else {
         this.toastr.info('可惜你不是管理員~');
-        this.route.navigateByUrl('/front/register');
+        this.route.navigateByUrl('/front/home-page');
       }
 
     }

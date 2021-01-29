@@ -112,7 +112,7 @@
               <tr>
                 <td *ngFor="let item of myOrder">
                   <button on-click="selectOrder(item.oid)" type="button"
-                    class="btn btn-sm btn-outline-secondary">訂單{{item.oid}}</button>
+                    class="btn btn-sm btn-outline-info">訂單{{item.oid}}</button>
                 </td>
                 <td></td>
               </tr>
@@ -124,11 +124,11 @@
                 <th>總額</th>
                 <th>訂單狀態</th>
                 <th>
-                  <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-secondary">修改訂單</button>
+                  <button on-click="edit=1" type="button" class="btn btn-sm btn-outline-warning">修改訂單</button>
                   <ng-container *ngIf="edit">
                     <button on-click="updateOrder()" type="button" class="btn btn-sm btn-outline-secondary">確定修改</button>
                   </ng-container>
-                  <button on-click="edit=0" type="button" class="btn btn-sm btn-outline-secondary">取消</button>
+                  <button on-click="edit=0" type="button" class="btn btn-sm btn-outline-danger">取消</button>
                 </th>
               </tr>
             </thead>
