@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   rEmail = '';
   rPassword = '';
 
-
+  // 檢查登入身分
   checkLogin(loginData: LoginObj): void {
     if (loginData.status === '0') {
       this.toastr.error(loginData.message);
@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  // 執行登入-將使用者輸入回傳後端
   doLogin(): void {
     sessionStorage.removeItem('loginData');
 
@@ -48,8 +49,7 @@ export class RegisterComponent implements OnInit {
       userName: '我誰~',
       password: this.password,
       email: this.email
-    }
-
+    };
     this.email = '';
     this.password = '';
 
@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
       res => this.checkLogin(JSON.parse(JSON.stringify(res))));
   }
 
+  // 註冊功能
   doRegister(): void {
     const newitem =
     {
@@ -64,12 +65,11 @@ export class RegisterComponent implements OnInit {
       password: this.rPassword,
       email: this.rEmail,
       admin: '0'
-    }
+    };
 
     this.rUserName = '';
     this.rEmail = '';
     this.rPassword = '';
-
     this.dataService.register(JSON.parse(JSON.stringify(newitem))).subscribe(mes => this.toastr.success('趕快登入看看吧', mes));
 
   }

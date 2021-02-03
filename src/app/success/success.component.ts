@@ -32,6 +32,7 @@ export class SuccessComponent implements OnInit {
     console.log(this.cartsProduct);
   }
 
+  // 將訂單資料傳回後端
   sendOrder(): void {
     this.countAmount();
     const newitem =
@@ -44,12 +45,13 @@ export class SuccessComponent implements OnInit {
       amount: this.totalAmount,
       delStatus: '訂單處理中',
       oid: this.oid
-    }
+    };
 
     this.dataService.sendOrder(JSON.parse(JSON.stringify(newitem)));
-    this.toastr.success('成功送出訂單')
+    this.toastr.success('成功送出訂單');
   }
 
+  // 將訂單商品數目分批回傳
   sendOrderProduct(): void {
 
     this.cartsProduct.forEach(item => {
@@ -58,13 +60,14 @@ export class SuccessComponent implements OnInit {
         oid: this.oid,
         productName: item.productName,
         amount: item.amount
-      }
+      };
       console.log(newitem);
       this.dataService.sendOrderProduct(JSON.parse(JSON.stringify(newitem)));
     });
 
   }
 
+  // 確認訂單-送出資料
   checkOrder(): void {
     this.sendOrder();
     this.sendOrderProduct();
@@ -72,6 +75,7 @@ export class SuccessComponent implements OnInit {
 
   }
 
+  // 算總價
   countAmount(): void {
     this.totalAmount = 0;
 
@@ -82,6 +86,7 @@ export class SuccessComponent implements OnInit {
 
   }
 
+  // 設定訂單編號
   getOid(): string {
     const oid = Math.floor(Math.random() * 1000000);
     return oid.toString();

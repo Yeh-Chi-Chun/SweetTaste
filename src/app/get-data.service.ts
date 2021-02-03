@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Order, OrderProduct, Product } from './all-type.service';
+import { Product } from './all-type.service';
 
 
 @Injectable({

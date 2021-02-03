@@ -1,18 +1,13 @@
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService, Product } from './../get-data.service';
+import { GetDataService } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
-
-
-
-
+import { Product } from '../all-type.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-
-
 
 export class ProductComponent implements OnInit {
 
@@ -27,6 +22,7 @@ export class ProductComponent implements OnInit {
   pageSize = 4;
   currentPage = 0;
 
+  // 加入購物車
   addProduct(product: Product): void {
     const newitem =
     {
@@ -38,9 +34,8 @@ export class ProductComponent implements OnInit {
     };
     localStorage.setItem(product.productName, JSON.stringify(newitem));
     this.toastr.success('成功加入購物車');
-    console.log('成功加入購物車');
-
   }
+
   // 拿商品資料並設定初始值
   setData(data: Product[]): void {
     this.productList = data;
@@ -74,71 +69,65 @@ export class ProductComponent implements OnInit {
 
     switch (classification) {
       case 'newList': {
-        this.currentClass = '新品上市';
         this.productList.forEach(item => {
           if (item.newList === '1') {
             this.currentProductList.push(item);
           }
         });
-        this.changePage(1);
-        this.setPage();
+        this.productC('新品上市');
         break;
       }
       case 'popular': {
-        this.currentClass = '人氣推薦';
         this.productList.forEach(item => {
           if (item.popular === '1') {
             this.currentProductList.push(item);
           }
         });
-        this.changePage(1);
-        this.setPage();
+        this.productC('人氣推薦');
         break;
       }
       case 'featured': {
-        this.currentClass = '本日精選';
+
         this.productList.forEach(item => {
           if (item.featured === '1') {
             this.currentProductList.push(item);
           }
         });
-        this.changePage(1);
-        this.setPage();
+        this.productC('本日精選');
         break;
       }
       case 'isCake': {
-        this.currentClass = '蛋糕';
         this.productList.forEach(item => {
           if (item.isCake === '1') {
             console.log(item);
             this.currentProductList.push(item);
           }
         });
-        this.changePage(1);
-        this.setPage();
+        this.productC('蛋糕');
         break;
       }
       case 'isSweets': {
-        this.currentClass = '點心';
         this.productList.forEach(item => {
           if (item.isSweets === '1') {
             this.currentProductList.push(item);
           }
         });
-        this.changePage(1);
-        this.setPage();
+        this.productC('點心');
         break;
       }
       case 'all': {
-        this.currentClass = '甜點';
         this.currentProductList = this.productList;
-        this.changePage(1);
-        this.setPage();
+        this.productC('甜點');
         break;
       }
-
-
     }
+  }
+
+  // 商品分類小功能
+  productC(name: string): void {
+    this.currentClass = '新品上市';
+    this.changePage(1);
+    this.setPage();
   }
 
   // 搜尋商品

@@ -1,28 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService, LoginObj, Order, OrderProduct } from '../get-data.service';
+import { Order, LoginObj, OrderProduct } from '../all-type.service';
+import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-order-manage',
   templateUrl: './order-manage.component.html',
   styleUrls: ['./order-manage.component.css']
 })
+
 export class OrderManageComponent implements OnInit {
 
   constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
 
-  orderList: Order[] = [];
-  temp = sessionStorage.getItem('loginData') || '';
-  loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
-  orderProductList: OrderProduct[] = [];
-  currentOrderProduct: OrderProduct[] = [];
-  myOrder: Order[] = [];
-  modifyStatus = '';
-
-  userName = '';
-  edit = 0;
-  insert = 0;
   orderNow: Order =
     {
       name: '',
@@ -34,7 +25,19 @@ export class OrderManageComponent implements OnInit {
       delStatus: '',
       oid: ''
     };
+  orderList: Order[] = [];
+  temp = sessionStorage.getItem('loginData') || '';
+  loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
+  orderProductList: OrderProduct[] = [];
+  currentOrderProduct: OrderProduct[] = [];
+  myOrder: Order[] = [];
+  modifyStatus = '';
+  userName = '';
+  edit = 0;
+  insert = 0;
 
+
+  // 更新訂單資料並回傳
   updateOrder(): void {
 
     const newitem =
@@ -47,7 +50,7 @@ export class OrderManageComponent implements OnInit {
       amount: this.orderNow.amount,
       delStatus: this.modifyStatus,
       oid: this.orderNow.oid
-    }
+    };
 
     this.dataService.updateOrder(JSON.parse(JSON.stringify(newitem))).subscribe(mes => {
       this.toastr.success(mes);
@@ -57,43 +60,24 @@ export class OrderManageComponent implements OnInit {
 
   }
 
-
-
+  // 給值
   setOrder(data: Order[]): void {
     this.orderList = data;
-    console.log('all:', this.orderList);
   }
 
+  // 給值
   setorderProduct(data: OrderProduct[]): void {
     this.orderProductList = data;
-    console.log('all:', this.orderProductList);
   }
 
-  getUserName(): void {
-
-    if (this.loginData) {
-      this.temp = sessionStorage.getItem('loginData') || '';
-      this.loginData = JSON.parse(this.temp);
-      this.userName = this.loginData.userName;
-      console.log(this.userName);
-      this.toastr.info('不錯喔~有記得登入喔');
-      this.searchOrder();
-    }
-    else {
-      this.toastr.info('趕快去登入吧', '您還沒登入喔');
-      this.route.navigateByUrl('/front/register');
-    }
-  }
-
+  // 搜尋所有訂單
   searchOrder(): void {
-    console.log('My order:', this.myOrder);
-    console.log('orderList:', this.orderList);
     this.orderList.forEach(item => {
       this.myOrder.push(item);
     });
-
   }
 
+  // 選擇該筆訂單
   selectOrder(selectOid: string): void {
     this.myOrder.forEach(item => {
       if (item.oid === selectOid) {
@@ -104,23 +88,21 @@ export class OrderManageComponent implements OnInit {
     this.searchOrderProduct(this.orderNow.oid);
   }
 
+  // 搜尋訂單商品數量
   searchOrderProduct(selectOid: string): void {
     this.currentOrderProduct = [];
     this.orderProductList.forEach(item => {
       if (item.oid === selectOid) {
         this.currentOrderProduct.push(item);
       }
-
     });
-
-    console.log(this.currentOrderProduct);
-
   }
 
   logOut(): void {
     this.dataService.logOut();
   }
 
+  // 檢查是否是管理員
   checkAdmin(): void {
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
@@ -141,8 +123,6 @@ export class OrderManageComponent implements OnInit {
     }
   }
 
-
-
   ngOnInit(): void {
 
     this.checkAdmin();
@@ -151,7 +131,7 @@ export class OrderManageComponent implements OnInit {
       this.setorderProduct(value);
       this.dataService.getOrder().subscribe(res => {
         this.setOrder(res);
-        this.getUserName();
+        this.searchOrder();
       });
     });
   }
