@@ -125,7 +125,7 @@ export class ProductComponent implements OnInit {
 
   // 商品分類小功能
   productC(name: string): void {
-    this.currentClass = '新品上市';
+    this.currentClass = name;
     this.changePage(1);
     this.setPage();
   }
