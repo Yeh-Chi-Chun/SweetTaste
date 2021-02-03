@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService, LoginObj, Product } from '../get-data.service';
+import { LoginObj, Product } from '../all-type.service';
+import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-manage',

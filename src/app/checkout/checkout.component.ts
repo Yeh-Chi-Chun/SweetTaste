@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService, Product } from '../get-data.service';
+import { Product } from '../all-type.service';
+import { GetDataService} from '../get-data.service';
 
 @Component({
   selector: 'app-checkout',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { threadId } from 'worker_threads';
+import { OrderDel, LoginObj, Product } from '../all-type.service';
 import { CartsProduct } from '../checkout/checkout.component';
-import { GetDataService, LoginObj, Product } from '../get-data.service';
+import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-success',
@@ -21,7 +21,7 @@ export class SuccessComponent implements OnInit {
   totalAmount = 0;
   oid = '';
 
-  //拿購物車資訊
+  // 拿購物車資訊
   getLocalStorage(productList: Product[]): void {
     productList.forEach(element => {
       if (localStorage.getItem(element.productName)) {
@@ -47,7 +47,7 @@ export class SuccessComponent implements OnInit {
     }
 
     this.dataService.sendOrder(JSON.parse(JSON.stringify(newitem)));
-    this.toastr.success("成功送出訂單")
+    this.toastr.success('成功送出訂單')
   }
 
   sendOrderProduct(): void {
@@ -102,9 +102,4 @@ export class SuccessComponent implements OnInit {
 
 }
 
-export interface OrderDel {
 
-  name: string;
-  address: string;
-  phone: string;
-}

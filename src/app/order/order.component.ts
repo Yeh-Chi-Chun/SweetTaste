@@ -1,7 +1,8 @@
-import { GetDataService, LoginObj, Order, OrderProduct } from './../get-data.service';
+import { GetDataService } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Order, LoginObj, OrderProduct } from '../all-type.service';
 
 @Component({
   selector: 'app-order',
@@ -56,12 +57,12 @@ export class OrderComponent implements OnInit {
       this.searchOrder();
     }
     else {
-      this.toastr.info('趕快去登入吧','您還沒登入喔');
+      this.toastr.info('趕快去登入吧', '您還沒登入喔');
       this.route.navigateByUrl('/front/register');
     }
   }
 
-  searchOrder() : void{
+  searchOrder(): void {
     console.log('My order:', this.myOrder);
     console.log('orderList:', this.orderList);
     this.orderList.forEach(item => {

@@ -1,6 +1,6 @@
-import { logging } from 'protractor';
-import { GetDataService, LoginObj } from './../get-data.service';
+import { GetDataService} from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
+import { LoginObj } from '../all-type.service';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +15,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dataService: GetDataService) { }
 
-  logOut() {
+  logOut(): void {
     this.dataService.logOut();
   }
 
-  checkAdmin() {
+  checkAdmin(): void {
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
       this.loginData = JSON.parse(this.temp);

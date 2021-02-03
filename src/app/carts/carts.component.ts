@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GetDataService, LoginObj, Product } from './../get-data.service';
+import { GetDataService } from './../get-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { LoginObj, Product } from '../all-type.service';
 
 @Component({
   selector: 'app-carts',
@@ -91,7 +92,7 @@ export class CartsComponent implements OnInit {
 
   }
 
-  checkLogin() {
+  checkLogin(): void {
 
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
@@ -107,10 +108,7 @@ export class CartsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.dataService.getProductData().subscribe(value => this.getLocalStorage(value));
-    // const aaa = localStorage.getItem('馬卡龍') || '';
-    // console.log(JSON.parse(aaa));
   }
 
 }

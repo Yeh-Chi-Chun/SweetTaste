@@ -1,8 +1,8 @@
-import { LoginObj } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { GetDataService } from '../get-data.service';
 import { Router } from '@angular/router';
+import { LoginObj } from '../all-type.service';
 
 @Component({
   selector: 'app-register',
