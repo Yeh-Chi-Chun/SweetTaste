@@ -32,7 +32,7 @@ export class SuccessComponent implements OnInit {
     console.log(this.cartsProduct);
   }
 
-  sendOrder() {
+  sendOrder(): void {
     this.countAmount();
     const newitem =
     {
@@ -50,7 +50,7 @@ export class SuccessComponent implements OnInit {
     this.toastr.success("成功送出訂單")
   }
 
-  sendOrderProduct() {
+  sendOrderProduct(): void {
 
     this.cartsProduct.forEach(item => {
       const newitem =
@@ -65,7 +65,7 @@ export class SuccessComponent implements OnInit {
 
   }
 
-  checkOrder() {
+  checkOrder(): void {
     this.sendOrder();
     this.sendOrderProduct();
     this.route.navigateByUrl('/front/home');

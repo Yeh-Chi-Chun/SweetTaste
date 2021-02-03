@@ -81,7 +81,7 @@ export class GetDataService {
     return this.http.post(productUrl, body, { responseType: 'text' });
   }
 
-  register(body: string) {
+  register(body: string){
 
     const productUrl = 'http://localhost:8080/register';
 

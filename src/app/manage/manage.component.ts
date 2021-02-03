@@ -13,18 +13,22 @@ export class ManageComponent implements OnInit {
   constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
 
   temp = sessionStorage.getItem('loginData') || '';
+  filesToUpload: File[] = [];
   loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   productList: Product[] = [];
   insert = 0;
   edit = 0;
   sentName = '';
   sentPrice = '';
+  sentPic = '';
   sentReserve = '';
   sentnewList = '0';
   sentpopular = '0';
   sentfeatured = '0';
   sentisCake = '0';
   sentisSweets = '0';
+  selectedFile = null;
+  picture = '';
 
   setProperty(property: string): void {
 
@@ -184,9 +188,6 @@ export class ManageComponent implements OnInit {
 
     }
   }
-
-
-
 
   ngOnInit(): void {
     this.dataService.getProductData().subscribe(value => this.setData(value));

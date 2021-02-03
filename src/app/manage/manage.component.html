@@ -183,6 +183,8 @@
                     <td>
                       <div class="btn-group mr-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
+
+                        <img src='' alt="照片">
                         <button on-click="insertProduct()" type="button"
                           class="btn btn-sm btn-outline-primary">確認新增</button>
                       </div>
@@ -197,41 +199,41 @@
                         placeholder="請輸入修改庫存"></td>
                     <td><input [(ngModel)]="sentPrice" class="form-control form-control-dark w-100" type="text"
                         placeholder="請輸入修改價格"></td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <input on-click="setProperty('newList')" class="form-check-input" type="checkbox"
-                              id="inlineCheckbox1" value="true">
-                            <label class="form-check-label" for="inlineCheckbox1"></label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <input on-click="setProperty('popular')" class="form-check-input" type="checkbox"
-                              id="inlineCheckbox2" value="0">
-                            <label class="form-check-label" for="inlineCheckbox2"></label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <input on-click="setProperty('featured')" class="form-check-input" type="checkbox"
-                              id="inlineCheckbox3" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox3"></label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox"
-                              id="inlineCheckbox4" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox4"></label>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="form-check form-check-inline">
-                            <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox"
-                              id="inlineCheckbox5" value="option3">
-                            <label class="form-check-label" for="inlineCheckbox5"></label>
-                          </div>
-                        </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('newList')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox1" value="true">
+                        <label class="form-check-label" for="inlineCheckbox1"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('popular')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox2" value="0">
+                        <label class="form-check-label" for="inlineCheckbox2"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('featured')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox3" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox3"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('isCake')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox4" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox4"></label>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-check form-check-inline">
+                        <input on-click="setProperty('isSweets')" class="form-check-input" type="checkbox"
+                          id="inlineCheckbox5" value="option3">
+                        <label class="form-check-label" for="inlineCheckbox5"></label>
+                      </div>
+                    </td>
                     <td>
                       <div class="btn-group mr-2">
                         <button on-click="updateProduct()" type="button"
