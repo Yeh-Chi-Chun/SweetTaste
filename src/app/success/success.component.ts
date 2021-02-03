@@ -1,3 +1,4 @@
+import { OrderApiService } from './../order-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +13,7 @@ import { GetDataService } from '../get-data.service';
 })
 export class SuccessComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router,private orderApi:OrderApiService) { }
 
   cartsProduct: CartsProduct[] = [];
   orderdelData: OrderDel = JSON.parse(localStorage.getItem('orderDeliver') || '');
@@ -47,7 +48,7 @@ export class SuccessComponent implements OnInit {
       oid: this.oid
     };
 
-    this.dataService.sendOrder(JSON.parse(JSON.stringify(newitem)));
+    this.orderApi.sendOrder(JSON.parse(JSON.stringify(newitem)));
     this.toastr.success('成功送出訂單');
   }
 
@@ -62,7 +63,7 @@ export class SuccessComponent implements OnInit {
         amount: item.amount
       };
       console.log(newitem);
-      this.dataService.sendOrderProduct(JSON.parse(JSON.stringify(newitem)));
+      this.orderApi.sendOrderProduct(JSON.parse(JSON.stringify(newitem)));
     });
 
   }
@@ -72,7 +73,6 @@ export class SuccessComponent implements OnInit {
     this.sendOrder();
     this.sendOrderProduct();
     this.route.navigateByUrl('/front/home');
-
   }
 
   // 算總價
@@ -81,7 +81,6 @@ export class SuccessComponent implements OnInit {
 
     this.cartsProduct.forEach(item => {
       this.totalAmount = this.totalAmount + item.productPrice * item.amount;
-
     });
 
   }
@@ -99,8 +98,6 @@ export class SuccessComponent implements OnInit {
     const temp = sessionStorage.getItem('loginData') || '';
     this.loginData = JSON.parse(temp);
     this.oid = this.getOid();
-
-
   }
 
 

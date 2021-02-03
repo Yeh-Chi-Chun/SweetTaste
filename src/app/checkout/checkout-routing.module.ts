@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// Constant
-import { appPath } from '../app-path.const';
 
 // Component
 import { CheckoutComponent } from './checkout.component';

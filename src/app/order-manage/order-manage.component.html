@@ -110,7 +110,7 @@
           <table class="table table-striped table-sm">
             <thead>
               <tr>
-                <td *ngFor="let item of myOrder">
+                <td *ngFor="let item of orderList">
                   <button on-click="selectOrder(item.oid)" type="button"
                     class="btn btn-sm btn-outline-primary">訂單: {{item.oid}}</button>
                 </td>

@@ -1,8 +1,8 @@
-import { GetDataService } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Order, LoginObj, OrderProduct } from '../all-type.service';
+import { OrderApiService } from '../order-api.service';
 
 @Component({
   selector: 'app-order',
@@ -34,27 +34,26 @@ export class OrderComponent implements OnInit {
     };
 
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+  constructor(private toastr: ToastrService, private route: Router, private orderApi: OrderApiService) { }
 
+  // 給值
   setOrder(data: Order[]): void {
     this.orderList = data;
-    console.log('all:', this.orderList);
   }
 
+  // 給值
   setorderProduct(data: OrderProduct[]): void {
     this.orderProductList = data;
-    console.log('all:', this.orderProductList);
   }
 
+  // 從session讀取使用者名稱，並確認是否登入
   getUserName(): void {
-
     if (this.loginData) {
       this.temp = sessionStorage.getItem('loginData') || '';
       this.loginData = JSON.parse(this.temp);
       this.userName = this.loginData.userName;
-      console.log(this.userName);
       this.toastr.info('不錯喔~有記得登入喔');
-      this.searchOrder();
+      this.searchMyOrder();
     }
     else {
       this.toastr.info('趕快去登入吧', '您還沒登入喔');
@@ -62,51 +61,26 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  searchOrder(): void {
-    console.log('My order:', this.myOrder);
-    console.log('orderList:', this.orderList);
+  // 搜尋自己的訂單
+  searchMyOrder(): void {
     this.orderList.forEach(item => {
-
-      console.log(item.userName);
-      console.log(this.userName);
       if (item.userName === this.userName) {
         this.myOrder.push(item);
       }
-      console.log('My order:', this.myOrder);
     });
-
   }
 
+  // 選擇該筆訂單
   selectOrder(selectOid: string): void {
-    this.myOrder.forEach(item => {
-      if (item.oid === selectOid) {
-        this.orderNow = item;
-      }
-    });
-
-    this.searchOrderProduct(this.orderNow.oid);
+    this.orderNow = this.orderApi.selectOrder(selectOid, this.myOrder);
+    this.orderApi.searchOrderProduct(this.orderNow.oid, this.orderProductList);
   }
-
-  searchOrderProduct(selectOid: string): void {
-    this.currentOrderProduct = [];
-    this.orderProductList.forEach(item => {
-      if (item.oid === selectOid) {
-        this.currentOrderProduct.push(item);
-      }
-
-    });
-
-    console.log(this.currentOrderProduct);
-
-  }
-
-
 
   ngOnInit(): void {
 
-    this.dataService.getOrderProduct().subscribe(value => {
+    this.orderApi.getOrderProduct().subscribe(value => {
       this.setorderProduct(value);
-      this.dataService.getOrder().subscribe(res => {
+      this.orderApi.getOrder().subscribe(res => {
         this.setOrder(res);
         this.getUserName();
       });

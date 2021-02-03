@@ -1,8 +1,7 @@
+import { LoginAPIService } from './../login-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService } from '../get-data.service';
-import { Router } from '@angular/router';
-import { LoginObj } from '../all-type.service';
+
 
 @Component({
   selector: 'app-register',
@@ -11,34 +10,13 @@ import { LoginObj } from '../all-type.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+  constructor(private toastr: ToastrService, private loginApi: LoginAPIService) { }
 
   email = '';
   password = '';
   rUserName = '';
   rEmail = '';
   rPassword = '';
-
-  // 檢查登入身分
-  checkLogin(loginData: LoginObj): void {
-    if (loginData.status === '0') {
-      this.toastr.error(loginData.message);
-    }
-    else if (loginData.status === '1') {
-
-      if (loginData.admin === '1') {
-        this.toastr.success('loginData.message', '管理員登入');
-        this.route.navigateByUrl('/manage');
-      }
-      else {
-        this.toastr.success(loginData.message, loginData.userName + ' 您好');
-        this.route.navigateByUrl('/front/home');
-      }
-
-      sessionStorage.setItem('loginData', JSON.stringify(loginData));
-
-    }
-  }
 
   // 執行登入-將使用者輸入回傳後端
   doLogin(): void {
@@ -53,8 +31,8 @@ export class RegisterComponent implements OnInit {
     this.email = '';
     this.password = '';
 
-    this.dataService.loginApi(JSON.parse(JSON.stringify(newitem))).subscribe(
-      res => this.checkLogin(JSON.parse(JSON.stringify(res))));
+    this.loginApi.login(JSON.parse(JSON.stringify(newitem))).subscribe(
+      res => this.loginApi.checkLogin(JSON.parse(JSON.stringify(res))));
   }
 
   // 註冊功能
@@ -70,8 +48,7 @@ export class RegisterComponent implements OnInit {
     this.rUserName = '';
     this.rEmail = '';
     this.rPassword = '';
-    this.dataService.register(JSON.parse(JSON.stringify(newitem))).subscribe(mes => this.toastr.success('趕快登入看看吧', mes));
-
+    this.loginApi.register(JSON.parse(JSON.stringify(newitem))).subscribe(mes => this.toastr.success('趕快登入看看吧', mes));
   }
 
 

@@ -1,3 +1,4 @@
+import { LoginAPIService } from './../login-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +12,7 @@ import { GetDataService } from '../get-data.service';
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router, private loginApi: LoginAPIService) { }
 
   temp = sessionStorage.getItem('loginData') || '';
   filesToUpload: File[] = [];
@@ -170,29 +171,11 @@ export class ManageComponent implements OnInit {
 
   }
 
-  checkAdmin(): void {
-    if (this.loginData) {
-      this.temp = sessionStorage.getItem('loginData') || '';
-      this.loginData = JSON.parse(this.temp);
-      if (this.loginData.admin === '1') {
-        this.toastr.info('管理員你回來啦');
-      }
-      else {
-        this.toastr.info('可惜你不是管理員~');
-        this.route.navigateByUrl('/front/home-page');
-      }
-
-    }
-    else {
-      this.toastr.info('您還沒登入喔', '趕快去登入吧');
-      this.route.navigateByUrl('/front/register');
-
-    }
-  }
-
   ngOnInit(): void {
     this.dataService.getProductData().subscribe(value => this.setData(value));
-    this.checkAdmin();
+    this.temp = sessionStorage.getItem('loginData') || '';
+    this.loginData = JSON.parse(this.temp);
+    this.loginApi.checkLogin(this.loginData);
   }
 
 }
