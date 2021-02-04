@@ -172,10 +172,9 @@ export class ManageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getProductData().subscribe(value => this.setData(value));
     this.temp = sessionStorage.getItem('loginData') || '';
-    this.loginData = JSON.parse(this.temp);
-    this.loginApi.checkLogin(this.loginData);
+    this.loginData = JSON.parse(JSON.stringify(this.temp));
+    this.loginApi.checkAdmin(this.loginData);
+    this.dataService.getProductData().subscribe(value => this.setData(value));
   }
-
 }

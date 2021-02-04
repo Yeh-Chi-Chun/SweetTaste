@@ -2,7 +2,6 @@ import { LoginAPIService } from './../login-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

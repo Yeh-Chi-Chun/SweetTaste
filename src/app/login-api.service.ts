@@ -39,7 +39,7 @@ export class LoginAPIService {
     else if (loginData.status === '1') {
 
       if (loginData.admin === '1') {
-        this.toastr.success('管理員登入');
+        this.toastr.success('loginData.message', '管理員登入');
         this.route.navigateByUrl('/manage');
       }
       else {
@@ -50,6 +50,28 @@ export class LoginAPIService {
       sessionStorage.setItem('loginData', JSON.stringify(loginData));
 
     }
+  }
+
+  checkAdmin(loginData: LoginObj): void {
+    if (loginData) {
+      const temp = sessionStorage.getItem('loginData') || '';
+      loginData = JSON.parse(temp);
+      if (loginData.admin === '1') {
+        this.toastr.info('管理員你回來啦');
+      }
+      else {
+        this.toastr.info('可惜你不是管理員~');
+        this.route.navigateByUrl('/front/register');
+      }
+
+    }
+    else {
+      this.toastr.info('您還沒登入喔', '趕快去登入吧');
+      this.route.navigateByUrl('/front/register');
+
+    }
+
+
   }
 
 }

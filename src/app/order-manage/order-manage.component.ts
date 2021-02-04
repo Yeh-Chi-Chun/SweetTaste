@@ -3,7 +3,7 @@ import { LoginAPIService } from './../login-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Order, LoginObj, OrderProduct } from '../all-type.service';
-import { GetDataService } from '../get-data.service';
+
 
 @Component({
   selector: 'app-order-manage',
@@ -83,7 +83,7 @@ export class OrderManageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.logApi.checkLogin(this.loginData);
+    this.logApi.checkAdmin(this.loginData);
     this.orderApi.getOrderProduct().subscribe(value => {
       this.setorderProduct(value);
       this.orderApi.getOrder().subscribe(res => {
