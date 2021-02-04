@@ -1,18 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Product } from './all-type.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class GetDataService {
+export class ProductApiService {
 
-  constructor(private http: HttpClient, private route: Router) { }
-
-
+  constructor(private http: HttpClient) { }
 
   getProductData(): Observable<Product[]> {
     const productUrl = 'http://localhost:8080/product';
@@ -39,11 +35,4 @@ export class GetDataService {
 
     return this.http.post(productUrl, body, { responseType: 'text' }).subscribe();
   }
-
 }
-
-
-
-
-
-

@@ -1,5 +1,5 @@
+import { ProductApiService } from './../product-api.service';
 import { ToastrService } from 'ngx-toastr';
-import { GetDataService } from './../get-data.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../all-type.service';
 
@@ -11,7 +11,7 @@ import { Product } from '../all-type.service';
 
 export class ProductComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
+  constructor(private productApi: ProductApiService, private toastr: ToastrService) { }
 
   productList: Product[] = [];
   currentProductList: Product[] = [];
@@ -146,7 +146,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('start get product data...');
-    this.dataService.getProductData().subscribe(value => this.setData(value));
+    this.productApi.getProductData().subscribe(value => this.setData(value));
   }
 }
 

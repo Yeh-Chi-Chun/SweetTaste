@@ -1,7 +1,7 @@
+import { ProductApiService } from './../product-api.service';
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Product } from '../all-type.service';
-import { GetDataService} from '../get-data.service';
+
 
 @Component({
   selector: 'app-checkout',
@@ -10,7 +10,7 @@ import { GetDataService} from '../get-data.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService) { }
+  constructor(private productApi: ProductApiService) { }
 
   cartsProduct: CartsProduct[] = [];
   totalAmount = 0;
@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getProductData().subscribe(value => this.getLocalStorage(value));
+    this.productApi.getProductData().subscribe(value => this.getLocalStorage(value));
   }
 
 }

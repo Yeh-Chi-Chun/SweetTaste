@@ -1,5 +1,5 @@
+import { ProductApiService } from './../product-api.service';
 import { Component, OnInit } from '@angular/core';
-import { GetDataService } from './../get-data.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LoginObj, Product } from '../all-type.service';
@@ -12,14 +12,14 @@ import { LoginObj, Product } from '../all-type.service';
 export class CartsComponent implements OnInit {
 
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router) { }
+  constructor(private productAPi: ProductApiService, private toastr: ToastrService, private route: Router) { }
 
   temp = sessionStorage.getItem('loginData') || '';
   loginData: LoginObj = JSON.parse(JSON.stringify(this.temp));
   cartsProduct: CartsProduct[] = [];
   totalAmount = 0;
 
-
+  // 拿購物車資料
   getLocalStorage(productList: Product[]): void {
     productList.forEach(element => {
       if (localStorage.getItem(element.productName)) {
@@ -31,6 +31,7 @@ export class CartsComponent implements OnInit {
     this.countAmount();
   }
 
+  // 刪除購物車商品
   deleteCarts(productName: string): void {
     let delIndex = 0;
     localStorage.removeItem(productName);
@@ -44,6 +45,7 @@ export class CartsComponent implements OnInit {
     console.log(removed);
   }
 
+  // 增加購物車商品數量
   addAmount(productName: string): void {
     let addIndex = 0;
     localStorage.removeItem(productName);
@@ -64,6 +66,7 @@ export class CartsComponent implements OnInit {
     this.countAmount();
   }
 
+  // 減少購物車商品數量
   reduceAmount(productName: string): void {
     let reduceIndex = 0;
     localStorage.removeItem(productName);
@@ -92,23 +95,8 @@ export class CartsComponent implements OnInit {
 
   }
 
-  checkLogin(): void {
-
-    if (this.loginData) {
-      this.temp = sessionStorage.getItem('loginData') || '';
-      this.loginData = JSON.parse(this.temp);
-      console.log(this.loginData.userName);
-      this.route.navigateByUrl('/front/checkout/customer-info');
-
-    }
-    else {
-      this.toastr.info('您還沒登入喔');
-      this.route.navigateByUrl('/front/register');
-    }
-  }
-
   ngOnInit(): void {
-    this.dataService.getProductData().subscribe(value => this.getLocalStorage(value));
+    this.productAPi.getProductData().subscribe(value => this.getLocalStorage(value));
   }
 
 }

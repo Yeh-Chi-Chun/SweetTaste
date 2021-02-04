@@ -1,10 +1,10 @@
+import { ProductApiService } from './../product-api.service';
 import { OrderApiService } from './../order-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrderDel, LoginObj, Product } from '../all-type.service';
 import { CartsProduct } from '../checkout/checkout.component';
-import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-success',
@@ -13,7 +13,7 @@ import { GetDataService } from '../get-data.service';
 })
 export class SuccessComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router,private orderApi:OrderApiService) { }
+  constructor(private productApi: ProductApiService, private toastr: ToastrService, private route: Router,private orderApi:OrderApiService) { }
 
   cartsProduct: CartsProduct[] = [];
   orderdelData: OrderDel = JSON.parse(localStorage.getItem('orderDeliver') || '');
@@ -92,7 +92,7 @@ export class SuccessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getProductData().subscribe(value => this.getLocalStorage(value));
+    this.productApi.getProductData().subscribe(value => this.getLocalStorage(value));
     this.orderdelData = JSON.parse(localStorage.getItem('orderDeliver') || '');
     this.orderEmail = localStorage.getItem('orderEmail') || '';
     const temp = sessionStorage.getItem('loginData') || '';

@@ -1,9 +1,8 @@
+import { ProductApiService } from './../product-api.service';
 import { LoginAPIService } from './../login-api.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginObj, Product } from '../all-type.service';
-import { GetDataService } from '../get-data.service';
 
 @Component({
   selector: 'app-manage',
@@ -12,7 +11,7 @@ import { GetDataService } from '../get-data.service';
 })
 export class ManageComponent implements OnInit {
 
-  constructor(private dataService: GetDataService, private toastr: ToastrService, private route: Router, private loginApi: LoginAPIService) { }
+  constructor(private productApi: ProductApiService, private toastr: ToastrService, private loginApi: LoginAPIService) { }
 
   temp = sessionStorage.getItem('loginData') || '';
   filesToUpload: File[] = [];
@@ -32,6 +31,7 @@ export class ManageComponent implements OnInit {
   selectedFile = null;
   picture = '';
 
+  // 設置選項開關
   setProperty(property: string): void {
 
     switch (property) {
@@ -80,6 +80,8 @@ export class ManageComponent implements OnInit {
     }
 
   }
+
+  // 初始化變數
   init(): void {
     this.insert = 0;
     this.edit = 0;
@@ -93,12 +95,13 @@ export class ManageComponent implements OnInit {
     this.sentisSweets = '0';
   }
 
+  // 打開新增欄位
   openInsert(): void {
     this.init();
     this.insert = 1;
     this.edit = 1;
   }
-
+  // 打開修改欄位
   openUpdate(name: string): void {
     this.init();
     this.sentName = name;
@@ -110,6 +113,7 @@ export class ManageComponent implements OnInit {
     this.productList = data;
   }
 
+  // 新增物品傳到後端
   insertProduct(): void {
     if (this.sentName !== '' && this.sentPrice !== '' && this.sentReserve !== '') {
       const newitem =
@@ -126,10 +130,10 @@ export class ManageComponent implements OnInit {
       };
 
       console.log(newitem);
-      this.dataService.sentProductData(JSON.parse(JSON.stringify(newitem)));
+      this.productApi.sentProductData(JSON.parse(JSON.stringify(newitem)));
       this.init();
       this.toastr.success('成功新增');
-      this.dataService.getProductData().subscribe(value => this.setData(value));
+      this.productApi.getProductData().subscribe(value => this.setData(value));
     }
     else {
       this.toastr.error('有欄位沒有填喔');
@@ -137,12 +141,14 @@ export class ManageComponent implements OnInit {
 
   }
 
+  // 刪除物品
   delProduct(productName: string): void {
-    this.dataService.delProductData(productName);
+    this.productApi.delProductData(productName);
     this.toastr.success('成功刪除');
-    this.dataService.getProductData().subscribe(value => this.setData(value));
+    this.productApi.getProductData().subscribe(value => this.setData(value));
   }
 
+  // 修改物品
   updateProduct(): void {
     if (this.sentName !== '' && this.sentPrice !== '' && this.sentReserve !== '') {
       const newitem =
@@ -159,10 +165,10 @@ export class ManageComponent implements OnInit {
       };
 
       console.log(newitem);
-      this.dataService.updateProductData(JSON.parse(JSON.stringify(newitem)));
+      this.productApi.updateProductData(JSON.parse(JSON.stringify(newitem)));
       this.init();
       this.toastr.success('成功修改');
-      this.dataService.getProductData().subscribe(value => this.setData(value));
+      this.productApi.getProductData().subscribe(value => this.setData(value));
     }
     else {
       this.toastr.error('有欄位沒有填喔');
@@ -175,6 +181,6 @@ export class ManageComponent implements OnInit {
     this.temp = sessionStorage.getItem('loginData') || '';
     this.loginData = JSON.parse(JSON.stringify(this.temp));
     this.loginApi.checkAdmin(this.loginData);
-    this.dataService.getProductData().subscribe(value => this.setData(value));
+    this.productApi.getProductData().subscribe(value => this.setData(value));
   }
 }

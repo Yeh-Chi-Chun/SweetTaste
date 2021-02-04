@@ -13,6 +13,7 @@ export class ReceiptInfoComponent implements OnInit {
 
   email = '';
 
+  // 儲存email到localstorage
   saveEmail(): void {
 
     if (this.email !== '') {

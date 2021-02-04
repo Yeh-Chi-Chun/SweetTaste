@@ -15,6 +15,7 @@ export class CustomerInfoComponent implements OnInit {
   phone = '';
   address = '';
 
+  // 儲存訂單資訊到localstorage
   saveDeliver(): void {
     const newitem =
     {
