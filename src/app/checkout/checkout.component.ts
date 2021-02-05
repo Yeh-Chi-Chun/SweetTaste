@@ -15,6 +15,7 @@ export class CheckoutComponent implements OnInit {
   cartsProduct: CartsProduct[] = [];
   totalAmount = 0;
 
+  // 拿購物車資料
   getLocalStorage(productList: Product[]): void {
     productList.forEach(element => {
       if (localStorage.getItem(element.productName)) {
@@ -26,6 +27,7 @@ export class CheckoutComponent implements OnInit {
     this.countAmount();
   }
 
+  // 算總價
   countAmount(): void {
     this.totalAmount = 0;
 
