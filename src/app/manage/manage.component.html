@@ -183,7 +183,7 @@
                     <td>
                       <div class="btn-group mr-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">照片</button>
-
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="picture" [(ngModel)]="picture"  (change)="onFileSelected($event)" #fileInput >
                         <img src='' alt="照片">
                         <button on-click="insertProduct()" type="button"
                           class="btn btn-sm btn-outline-primary">確認新增</button>

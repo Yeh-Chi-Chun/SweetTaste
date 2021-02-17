@@ -28,9 +28,15 @@ export class ManageComponent implements OnInit {
   sentfeatured = '0';
   sentisCake = '0';
   sentisSweets = '0';
-  selectedFile = null;
+  selectedFile: any;
   picture = '';
 
+
+  onFileSelected(event?: any) {
+    console.log(12132113)
+    this.selectedFile = event.target.files[0];
+    console.log('圖片上傳', this.selectedFile.name);
+  }
   // 設置選項開關
   setProperty(property: string): void {
 

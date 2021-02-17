@@ -84,6 +84,9 @@ export class CartsComponent implements OnInit {
     this.countAmount();
 
   }
+  checkLogin(){
+
+  }
 
   countAmount(): void {
     this.totalAmount = 0;
